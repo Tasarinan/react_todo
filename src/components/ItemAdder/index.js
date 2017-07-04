@@ -7,28 +7,27 @@ class ItemAdder  extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {newItemTitle : ""};
-
-		this.handleTitleChange = this.handleTitleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleTitleChange(e){
+	handleTitleChange = (e) => {
 		const newItemTitle = e.target.value;
 		this.setState({newItemTitle});
-	}
+	};
 
-	handleSubmit(){
+	handleSubmit = () => {
 		const {categoryId, addNewItem} = this.props;
 		const newItemTitle = this.state.newItemTitle;
 
 		if(newItemTitle.trim()) addNewItem(newItemTitle, categoryId);
 
 		this.setState({newItemTitle: ""});
-	}
+	};
+
+	handleFormSubmit = (e) => {e.preventDefault(); this.handleSubmit()};
 
 	render() {
 		return (
-            <form className="ItemAdder">
+            <form className="ItemAdder" onSubmit={this.handleFormSubmit}>
                 <input
                     type="text"
                     name="categoryAdder"
