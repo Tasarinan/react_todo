@@ -26,8 +26,4 @@ const CategoryList = (props) => {
 	);
 };
 
-CategoryList.propTypes = {
-
-};
-
 export default CategoryList;

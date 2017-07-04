@@ -70,9 +70,4 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 	)
 };
 
-CategoryItem.propTypes = {
-    title: React.PropTypes.string,
-    subcategories: React.PropTypes.array
-};
-
 export default CategoryItem;

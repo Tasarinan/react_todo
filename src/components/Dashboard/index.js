@@ -1,48 +1,31 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
+    Switch,
     Route
 } from 'react-router-dom'
 
 import CategoryTile from '../../components/CategoryTile';
 import TodoTile from '../../components/TodoTile';
 
-const Dashboard = ({
-    addNewCategory,
-    categoryList,
-    itemsToRender,
-    editCategory,
-    deleteCategory,
-    addNewSubcategory,
-    addNewTask,
-    modalConfig,
-    getModalConfig,
-    isModalOpen,
-    handleModalOpen,
-}) => {
+const Dashboard = (props) => {
+
+	const {categoryList, addNewTask, ...restProps} = props;
+
 	return (
-		<Router>
+		<BrowserRouter>
 			<div className="Dashboard">
-				<CategoryTile
-					addNewCategory={addNewCategory}
-					categoryList={categoryList}
-					itemsToRender={itemsToRender}
-					editCategory={editCategory}
-					deleteCategory={deleteCategory}
-					addNewSubcategory={addNewSubcategory}
-					modalConfig={modalConfig}
-					getModalConfig={getModalConfig}
-					isModalOpen={isModalOpen}
-					handleModalOpen={handleModalOpen}
-				/>
-				<Route exact path="/:categoryId"
-					   render={props => <TodoTile categoryList={categoryList} addNewTask={addNewTask} {...props} />}
-				/>
-				<Route path="/:todoId/edit" render={() => (
-					<h2>Edit page</h2>
-				)}/>
+				<CategoryTile categoryList={categoryList} {...restProps} />
+				<Switch>
+					<Route exact path="/:categoryId"
+						   render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} {...routeProps} />}
+					/>
+					<Route path="/:todoId/edit" render={() => (
+						<h2>Edit page</h2>
+                    )}/>
+				</Switch>
 			</div>
-		</Router>
+		</BrowserRouter>
 	);
 };
 
