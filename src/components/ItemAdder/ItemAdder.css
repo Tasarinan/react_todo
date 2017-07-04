@@ -1,0 +1,10 @@
+.ItemAdder{
+    display: flex;
+    margin: 5px 20px 20px 20px;
+}
+#categoryAdder{
+    flex-grow: 1;
+    padding: 0 10px;
+    border: 2px solid #00BCD4;
+    min-height: 35px;
+}

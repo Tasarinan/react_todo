@@ -1,0 +1,18 @@
+.TodoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 10px;
+}
+.TodoItemName {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+.TodoItemTitle{
+    margin:0 20px;
+    flex-grow: 1;
+}
+.TodoItemButton {
+    margin:0 4px;
+}

@@ -1,0 +1,38 @@
+.CategoryItem {
+    display: flex;
+    flex-wrap: wrap;
+}
+.CategoryItemLine {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 5px 0;
+}
+.CategoryItemPanel{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.CategoryItemDropdown {
+    position: absolute;
+    left: 0;
+}
+.CategoryItemTitle{
+    margin:0 10px;
+    flex-grow: 1;
+}
+.CategoryItemTitle--hasSub{
+    margin:0 10px 0 40px;
+    flex-grow: 1;
+}
+.CategoryItemTitle a {
+    text-decoration: none;
+    color: inherit;
+}
+.CategoryItemTitle a.selected {
+    color: #00BCD4;
+}
+.CategoryItemButton {
+    margin:0 4px;
+}
