@@ -1,7 +1,7 @@
 import React from 'react';
 import './CategoryTile.css';
 
-import ItemAdder from '../ItemAdder';
+import ItemAdderContainer from '../../containers/ItemAdderContainer';
 import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
 
@@ -10,7 +10,7 @@ const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory
 
     return (
 		<div className="CategoryTile">
-			<ItemAdder
+			<ItemAdderContainer
 				addNewItem={addNewCategory}
 				placeholder={"Enter Category Title"}
 			/>

@@ -2,17 +2,14 @@ import React, {Component} from 'react';
 import CategoryItem from '../../components/CategoryItem';
 
 class CategoryItemContainer  extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            expanded: false,
-            isDialogOpen: false,
-        };
-    }
+    state = {
+        expanded: false,
+        isDialogOpen: false,
+    };
 
-    handleExpander = () => this.setState({expanded: !this.state.expanded});
+    handleExpander = () => this.setState(prevState => ({ expanded: !prevState.expanded }));
 
-    handleDialogOpen = () => this.setState({isDialogOpen: !this.state.isDialogOpen});
+    handleDialogOpen = () => this.setState(prevState => ({ isDialogOpen: !prevState.isDialogOpen }));
 
     render() {
         const {expanded, isDialogOpen} = this.state;

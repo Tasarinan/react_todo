@@ -3,10 +3,7 @@ import React from 'react';
 import ModalDialog from '../../components/ModalDialog'
 
 class ModalDialogContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {newItemTitle : ""};
-    }
+    state = {newItemTitle : ""};
 
     handleTitleChange = (e) => {
         this.setState({newItemTitle: e.target.value});

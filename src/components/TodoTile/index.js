@@ -1,7 +1,7 @@
 import React from 'react';
 import './TodoTile.css';
 
-import ItemAdder from '../ItemAdder';
+import ItemAdderContainer from '../../containers/ItemAdderContainer';
 import TodosList from '../TodosList'
 
 const TodoTile = ({match, categoryList, addNewTask}) => {
@@ -9,7 +9,7 @@ const TodoTile = ({match, categoryList, addNewTask}) => {
 
 	return (
 		<div className="TodoTile">
-			<ItemAdder placeholder={"Enter to add new task"} addNewItem={addNewTask} categoryId={categoryId}/>
+			<ItemAdderContainer placeholder={"Enter to add new task"} addNewItem={addNewTask} categoryId={categoryId}/>
 			<TodosList categoryList={categoryList} categoryId={categoryId}/>
 		</div>
 	);

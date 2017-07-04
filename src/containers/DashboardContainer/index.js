@@ -4,19 +4,16 @@ import data from '../../data/data.json';
 import Dashboard from '../../components/Dashboard';
 
 class DashboardContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-            categoryList: data,
-            modalConfig: {
-                itemTitle: "",
-                focusedItem: null,
-                mode: "",
-                title: ""
-            },
-            isModalOpen: false,
-        };
-    }
+    state = {
+        categoryList: data,
+        modalConfig: {
+            itemTitle: "",
+            focusedItem: null,
+            mode: "",
+            title: ""
+        },
+        isModalOpen: false,
+    };
 
     static createNewCategory(newTitle, isRoot) {
         return {
@@ -86,7 +83,7 @@ class DashboardContainer extends Component {
 
     getModalConfig = (modalConfig) => this.setState({modalConfig});
 
-    handleModalOpen = () => this.setState({isModalOpen: !this.state.isModalOpen});
+    handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
 
 
     render() {
