@@ -5,7 +5,7 @@ import ItemAdderContainer from '../../containers/ItemAdderContainer';
 import TodosList from '../TodosList'
 
 const TodoTile = ({match, categoryList, addNewTask}) => {
-	const categoryId = +match.params.categoryId;
+	const categoryId = Number(match.params.categoryId);
 
 	return (
 		<div className="TodoTile">
@@ -16,6 +16,3 @@ const TodoTile = ({match, categoryList, addNewTask}) => {
 };
 
 export default TodoTile;
-
-
-// addNewTask(,)

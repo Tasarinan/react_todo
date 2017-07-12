@@ -21,5 +21,6 @@ const CategoryEdit = ({itemTitle, id, getModalConfig, handleModalOpen}) => {
             <EditIcon onTouchTap={handleSubmit}/>
         </FloatingActionButton>
     );
-}
+};
+
 export default CategoryEdit;

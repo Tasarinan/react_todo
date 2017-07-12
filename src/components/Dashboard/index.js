@@ -5,28 +5,17 @@ import {
     Route
 } from 'react-router-dom'
 
-import CategoryTile from '../../components/CategoryTile';
-import TodoTile from '../../components/TodoTile';
+import Category from '../Category';
 
-const Dashboard = (props) => {
-
-	const {categoryList, addNewTask, ...restProps} = props;
-
-	return (
-		<BrowserRouter>
-			<div className="Dashboard">
-				<CategoryTile categoryList={categoryList} {...restProps} />
-				<Switch>
-					<Route exact path="/:categoryId"
-						   render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} {...routeProps} />}
-					/>
-					<Route path="/:todoId/edit" render={() => (
-						<h2>Edit page</h2>
-                    )}/>
-				</Switch>
-			</div>
-		</BrowserRouter>
-	);
-};
+const Dashboard = (props) =>  (
+	<BrowserRouter>
+		<Switch>
+			<Route path="/:todoId/edit" render={() => (
+				<h2>Edit page</h2>
+			)}/>
+			<Route render={ () => (<Category {...props}/>) }/>
+		</Switch>
+	</BrowserRouter>
+);
 
 export default Dashboard;
