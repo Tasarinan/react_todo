@@ -7,7 +7,7 @@ import {
 
 import Category from '../Category';
 
-const Dashboard = (props) =>  (
+const Dashboard = (props) => (
 	<BrowserRouter>
 		<Switch>
 			<Route path="/:categoryId/:todoId/edit" render={() => (

@@ -13,8 +13,8 @@ import TodoTile from '../TodoTile';
 
 const Category = ({categoryList, addNewTask, editTask, ...restProps}) => (
     <div>
-        <MainHeader/>
-        <ProgressBar/>
+        <MainHeader categoryList={categoryList}/>
+        <ProgressBar categoryList={categoryList}/>
         <div className="Category">
             <CategoryTile categoryList={categoryList} {...restProps} />
             <Switch>

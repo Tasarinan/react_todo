@@ -108,9 +108,9 @@ class DashboardContainer extends Component {
 
         return (
         	<Dashboard
-				addNewCategory={this.addNewCategory}
 				categoryList={categoryList}
 				itemsToRender={itemsToRender}
+                addNewCategory={this.addNewCategory}
 				editCategory={this.editCategory}
 				deleteCategory={this.deleteCategory}
 				addNewSubcategory={this.addNewSubcategory}
