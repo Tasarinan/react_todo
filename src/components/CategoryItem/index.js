@@ -12,7 +12,7 @@ import CategoryEdit from '../CategoryEdit';
 import AddSubCategory from '../AddSubCategory';
 
 const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
-	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen}) => {
+	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen, shouldRenderCRUD}) => {
 
 	const hasSubcategory = subcategories.length !== 0;
 
@@ -42,27 +42,31 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 				<div className="CategoryItemPanel">
 					{ expanderRender }
 					<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-						<NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
+						{shouldRenderCRUD
+							? <NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
+							: <span>{title}</span>
+						}
+
 					</div>
-					<CategoryEdit
+                    {shouldRenderCRUD && <CategoryEdit
 						itemTitle={title}
 						id={id}
 						getModalConfig={getModalConfig}
 						handleModalOpen={handleModalOpen}
-					/>
+					/>}
 				</div>
-				<div className="CategoryItemPanel">
+                {shouldRenderCRUD && <div className="CategoryItemPanel">
 					<CategoryDelete
-                        id={id}
+						id={id}
 						getModalConfig={getModalConfig}
 						handleModalOpen={handleModalOpen}
 					/>
 					<AddSubCategory
-                        id={id}
+						id={id}
 						getModalConfig={getModalConfig}
 						handleModalOpen={handleModalOpen}
 					/>
-				</div>
+				</div>}
 			</div>
 			{ subcategoriesListRender }
 		</li>

@@ -1,6 +1,7 @@
 .ItemAdder{
     display: flex;
-    margin: 5px 20px 20px 20px;
+    height: 36px;
+    margin: 0 20px 20px 20px;
 }
 #categoryAdder{
     flex-grow: 1;

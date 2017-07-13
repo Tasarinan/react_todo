@@ -1,6 +1,7 @@
 .CategoryItem {
     display: flex;
     flex-wrap: wrap;
+    min-height: 40px;
 }
 .CategoryItemLine {
     width: 100%;

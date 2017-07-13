@@ -6,14 +6,14 @@ import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
 
 const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory, deleteCategory, addNewSubcategory,
-     modalConfig, getModalConfig, isModalOpen, handleModalOpen}) => {
+     modalConfig, getModalConfig, isModalOpen, handleModalOpen, shouldRenderCRUD}) => {
 
     return (
 		<div className="CategoryTile">
-			<ItemAdderContainer
+			{shouldRenderCRUD && <ItemAdderContainer
 				addNewItem={addNewCategory}
 				placeholder={"Enter Category Title"}
-			/>
+			/>}
 			<CategoryList
 				categoryList={categoryList}
 				itemsToRender={itemsToRender}
@@ -22,15 +22,16 @@ const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory
 				addNewSubcategory={addNewSubcategory}
 				getModalConfig={getModalConfig}
 				handleModalOpen={handleModalOpen}
+				shouldRenderCRUD={shouldRenderCRUD}
 			/>
-			<ModalDialogContainer
+            {shouldRenderCRUD && <ModalDialogContainer
 				deleteCategory={deleteCategory}
 				editCategory={editCategory}
 				addNewSubcategory={addNewSubcategory}
 				modalConfig={modalConfig}
 				isModalOpen={isModalOpen}
 				handleModalOpen={handleModalOpen}
-			/>
+			/>}
 		</div>
     );
 };

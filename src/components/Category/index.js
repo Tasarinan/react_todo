@@ -16,7 +16,7 @@ const Category = ({categoryList, addNewTask, editTask, ...restProps}) => (
         <MainHeader categoryList={categoryList}/>
         <ProgressBar categoryList={categoryList}/>
         <div className="Category">
-            <CategoryTile categoryList={categoryList} {...restProps} />
+            <CategoryTile categoryList={categoryList} shouldRenderCRUD {...restProps} />
             <Switch>
                 <Route path="/:categoryId"
                        render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask} {...routeProps} />}
