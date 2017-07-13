@@ -6,16 +6,21 @@ import {
 } from 'react-router-dom'
 
 import Category from '../Category';
+import Todo from '../Todo';
 
-const Dashboard = (props) => (
-	<BrowserRouter>
-		<Switch>
-			<Route path="/:categoryId/:todoId/edit" render={() => (
-				<h2>Edit page</h2>
-			)}/>
-			<Route render={ () => <Category {...props}/> }/>
-		</Switch>
-	</BrowserRouter>
-);
+const Dashboard = (props) => {
+    return (
+		<BrowserRouter>
+			<Switch>
+				<Route
+					path="/:categoryId/:todoId/edit"
+					render={(routeProps) => (
+						<Todo {...props} {...routeProps}/>
+                    )}/>
+				<Route render={ () => <Category {...props}/> }/>
+			</Switch>
+		</BrowserRouter>
+    );
+};
 
 export default Dashboard;

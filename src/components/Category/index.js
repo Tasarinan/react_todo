@@ -19,7 +19,7 @@ const Category = ({categoryList, addNewTask, editTask, ...restProps}) => (
             <CategoryTile categoryList={categoryList} {...restProps} />
             <Switch>
                 <Route path="/:categoryId"
-                       render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask}{...routeProps} />}
+                       render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask} {...routeProps} />}
                 />
                 <Route render={() => (
                     <p>Please select an todo item to see it subtasks</p>
