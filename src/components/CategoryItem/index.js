@@ -35,6 +35,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 			modalConfig={modalConfig}
 			getModalConfig={getModalConfig}
 			handleModalOpen={handleModalOpen}
+			shouldRenderCRUD={shouldRenderCRUD}
 		/>);
 
 	return (
@@ -69,6 +70,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 							handleModalOpen={handleModalOpen}
 						/>
 					</div>
+
 					: <div className="CategoryItemPanel">
 						<IconButton >
 							<MoveToIcon/>
