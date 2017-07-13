@@ -81,6 +81,20 @@ class DashboardContainer extends Component {
         this.setState({categoryList: newCategoryList});
     };
 
+    editTask = (newTaskTitle, taskToEdit) => {
+        const newCategoryList = this.state.categoryList.map(category => {
+            category.todos.map(todo => {
+                if(todo.id === taskToEdit) {
+                    todo.title = newTaskTitle
+                }
+                return todo;
+            });
+            return category;
+        });
+
+        this.setState({categoryList: newCategoryList});
+    };
+
     getModalConfig = (modalConfig) => this.setState({modalConfig});
 
     handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
@@ -101,6 +115,7 @@ class DashboardContainer extends Component {
 				deleteCategory={this.deleteCategory}
 				addNewSubcategory={this.addNewSubcategory}
                 addNewTask={this.addNewTask}
+                editTask={this.editTask}
 				modalConfig={modalConfig}
 				getModalConfig={this.getModalConfig}
 				isModalOpen={isModalOpen}

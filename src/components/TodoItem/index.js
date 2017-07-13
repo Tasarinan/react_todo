@@ -2,31 +2,49 @@ import React, {Component} from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import EditIcon from 'material-ui/svg-icons/content/create';
 import TextField from 'material-ui/TextField';
-
+import Checkbox from 'material-ui/Checkbox';
 import './TodoItem.css';
 
 class TodoItem extends Component {
 	state = {
-
+		newItemTitle: ""
 	};
 
     handleTitleChange = (e) => {
         this.setState({newItemTitle: e.target.value});
     };
 
+    handleSubmit = () => {
+        const {editTask, id} = this.props;
+        const {newItemTitle} = this.state;
+
+        if(newItemTitle.trim()) editTask(newItemTitle, id);
+
+        this.setState({newItemTitle: ""});
+	};
+
     render() {
+    	const {title, isCompleted} = this.props;
         return (
 			<li className="TodoItem">
 				<div className="TodoItemName">
-					<input type="checkbox" name="isCompleted" />
+					<Checkbox
+						style={{width: 'auto'}}
+						name="isCompleted"
+						checked={isCompleted}
+					/>
 					<TextField
 						className="TodoItemTitle"
 						id="text-field-default"
-						defaultValue={this.props.title}
+						defaultValue={title}
+						onChange={this.handleTitleChange}
+						onBlur={this.handleSubmit}
 					/>
 				</div>
 				<FloatingActionButton className="CategoryItemButton" backgroundColor={"#78909C"} mini>
-					<EditIcon />
+					<EditIcon >
+
+					</EditIcon>
 				</FloatingActionButton>
 			</li>
         );

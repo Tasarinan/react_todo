@@ -13,7 +13,7 @@ const Dashboard = (props) =>  (
 			<Route path="/:todoId/edit" render={() => (
 				<h2>Edit page</h2>
 			)}/>
-			<Route render={ () => (<Category {...props}/>) }/>
+			<Route render={ () => <Category {...props}/> }/>
 		</Switch>
 	</BrowserRouter>
 );

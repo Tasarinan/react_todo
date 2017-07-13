@@ -3,20 +3,17 @@ import './TodosList.css'
 
 import TodoItem from '../TodoItem';
 
-const TodosList = ({ categoryList, categoryId }) => {
-
-    const todosList = categoryList
-		.filter(cat => cat.id === categoryId)
-        .reduce((currentCategory) => currentCategory).todos;
+const TodosList = ({ todosList, ...props }) => {
 
 	return (
 		<ul className="TodosList">
 			{todosList.map((item) =>
 				<TodoItem
-					item={item}
 					key={item.id}
+					id={item.id}
 					title={item.title}
 				    isCompleted={item.isCompleted}
+					{...props }
 				/>
 			)}
 		</ul>
