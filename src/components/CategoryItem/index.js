@@ -44,6 +44,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 				<div className="CategoryItemPanel">
 					{ expanderRender }
 					<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
+
 						{ shouldRenderCRUD
 							? <NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
 							: <span>{title}</span> }
