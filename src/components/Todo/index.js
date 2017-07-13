@@ -15,7 +15,11 @@ const Todo = ({match, categoryList, ...restProps}) => {
     return (
         <div>
             <AppBar title={`Task: ${todoItem.title}`} />
-            <CategoryTile categoryList={categoryList} shouldRenderCRUD={false} {...restProps} />
+            <CategoryTile
+                categoryList={categoryList}
+                shouldRenderCRUD={false}
+                {...restProps}
+            />
         </div>
     );
 };

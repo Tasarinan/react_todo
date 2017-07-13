@@ -2,6 +2,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import ArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import MoveToIcon from 'material-ui/svg-icons/content/reply';
 import { NavLink } from 'react-router-dom';
 
 import './CategoryItem.css';
@@ -42,31 +43,38 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 				<div className="CategoryItemPanel">
 					{ expanderRender }
 					<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-						{shouldRenderCRUD
+						{ shouldRenderCRUD
 							? <NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
-							: <span>{title}</span>
-						}
-
+							: <span>{title}</span> }
 					</div>
-                    {shouldRenderCRUD && <CategoryEdit
+
+                    { shouldRenderCRUD && <CategoryEdit
 						itemTitle={title}
 						id={id}
 						getModalConfig={getModalConfig}
 						handleModalOpen={handleModalOpen}
-					/>}
+					/> }
 				</div>
-                {shouldRenderCRUD && <div className="CategoryItemPanel">
-					<CategoryDelete
-						id={id}
-						getModalConfig={getModalConfig}
-						handleModalOpen={handleModalOpen}
-					/>
-					<AddSubCategory
-						id={id}
-						getModalConfig={getModalConfig}
-						handleModalOpen={handleModalOpen}
-					/>
-				</div>}
+
+                { shouldRenderCRUD
+					? <div className="CategoryItemPanel">
+						<CategoryDelete
+							id={id}
+							getModalConfig={getModalConfig}
+							handleModalOpen={handleModalOpen}
+						/>
+						<AddSubCategory
+							id={id}
+							getModalConfig={getModalConfig}
+							handleModalOpen={handleModalOpen}
+						/>
+					</div>
+					: <div className="CategoryItemPanel">
+						<IconButton >
+							<MoveToIcon/>
+						</IconButton>
+					</div>
+                }
 			</div>
 			{ subcategoriesListRender }
 		</li>
