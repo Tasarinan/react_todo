@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { NavLink } from 'react-router-dom';
+
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import EditIcon from 'material-ui/svg-icons/content/create';
 import TextField from 'material-ui/TextField';
@@ -24,7 +26,7 @@ class TodoItem extends Component {
 	};
 
     render() {
-    	const {title, isCompleted} = this.props;
+    	const {id, title, isCompleted, url} = this.props;
         return (
 			<li className="TodoItem">
 				<div className="TodoItemName">
@@ -41,11 +43,12 @@ class TodoItem extends Component {
 						onBlur={this.handleSubmit}
 					/>
 				</div>
-				<FloatingActionButton className="CategoryItemButton" backgroundColor={"#78909C"} mini>
-					<EditIcon >
-
-					</EditIcon>
-				</FloatingActionButton>
+				<NavLink to={`${url}/${id}/edit`} activeClassName="selected">
+					<FloatingActionButton className="CategoryItemButton" backgroundColor={"#78909C"} mini>
+						<EditIcon >
+						</EditIcon>
+					</FloatingActionButton>
+				</NavLink>
 			</li>
         );
     }

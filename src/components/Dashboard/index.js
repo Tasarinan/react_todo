@@ -10,7 +10,7 @@ import Category from '../Category';
 const Dashboard = (props) =>  (
 	<BrowserRouter>
 		<Switch>
-			<Route path="/:todoId/edit" render={() => (
+			<Route path="/:categoryId/:todoId/edit" render={() => (
 				<h2>Edit page</h2>
 			)}/>
 			<Route render={ () => <Category {...props}/> }/>

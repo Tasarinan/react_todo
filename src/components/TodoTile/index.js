@@ -13,7 +13,7 @@ const TodoTile = ({match, categoryList, addNewTask, editTask}) => {
 	return (
 		<div className="TodoTile">
 			<ItemAdderContainer placeholder={"Enter to add new task"} addNewItem={addNewTask}  categoryId={categoryId}/>
-			<TodosList todosList={todosList} editTask={editTask}/>
+			<TodosList todosList={todosList} editTask={editTask} url={match.url}/>
 		</div>
 	);
 };

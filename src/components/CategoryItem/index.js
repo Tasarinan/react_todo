@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import ArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 import './CategoryItem.css';
 
@@ -10,7 +10,6 @@ import CategoryList from '../CategoryList';
 import CategoryDelete from '../CategoryDelete';
 import CategoryEdit from '../CategoryEdit';
 import AddSubCategory from '../AddSubCategory';
-
 
 const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
 	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen}) => {
