@@ -99,7 +99,6 @@ class DashboardContainer extends Component {
 
     handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
 
-
     render() {
         const {categoryList, modalConfig, isModalOpen} = this.state;
         const itemsToRender = categoryList

@@ -1,0 +1,40 @@
+.TodoEdit{
+    flex-grow: 1;
+    margin: 10px 10px 0 10px;
+    list-style: none;
+    max-height: 90vh;
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.117647) 0 1px 4px;
+    padding: 15px;
+}
+.TodoEditButtonsWrap {
+    display: flex;
+    justify-content: flex-end;
+    height: 30px;
+}
+.TodoEditButton {
+    margin: 0 5px;
+}
+.TodoEditTitle, .TodoEditCheckboxWrap {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.TodoEditSpan {
+    color: darkcyan;
+    font-size: 18px;
+}
+.TodoEditTitleInput {
+    margin-left: 20px;
+    flex-grow: 1;
+}
+.TodoEditTextarea {
+    width: 70%;
+    height: 300px;
+    margin-bottom: 20px !important;
+    padding: 5px;
+    font-size: 16px;
+    resize: vertical;
+    border: 2px solid rgb(0, 188, 212);
+    border-radius: 3px;
+}

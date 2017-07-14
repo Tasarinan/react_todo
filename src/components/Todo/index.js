@@ -1,25 +1,32 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import CategoryTile from '../CategoryTile';
+import TodoEditContainer from '../../containers/TodoEditContainer';
+import { findCurrentItem } from '../../helpers'
+import './Todo.css';
 
-const Todo = ({match, categoryList, ...restProps}) => {
+const Todo = ({match, categoryList, editTask, ...restProps}) => {
     const categoryId = Number(match.params.categoryId),
-          todoId = Number(match.params.todoId);
+        todoId = Number(match.params.todoId);
 
-    const todoItem = categoryList
-        .filter(cat => cat.id === categoryId)
-        .reduce((currentCategory) => currentCategory)
-        .todos.filter(todo => todo.id === todoId)
-              .reduce((currentTodo) => currentTodo);
+    const todoItem = findCurrentItem(findCurrentItem(categoryList, categoryId).todos, todoId);
 
     return (
         <div>
             <AppBar title={`Task: ${todoItem.title}`} />
-            <CategoryTile
-                categoryList={categoryList}
-                shouldRenderCRUD={false}
-                {...restProps}
-            />
+            <div className="TodoEditTile">
+                <CategoryTile
+                    categoryList={categoryList}
+                    shouldRenderCRUD={false}
+                    {...restProps}
+                />
+                <TodoEditContainer
+                    categoryId={categoryId}
+                    todoItem={todoItem}
+                    editTask={editTask}
+                />
+            </div>
+
         </div>
     );
 };

@@ -24,6 +24,34 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 				</IconButton>
 			</div>);
 
+	const editCategoryRender =  (<CategoryEdit
+            itemTitle={title}
+            id={id}
+            getModalConfig={getModalConfig}
+            handleModalOpen={handleModalOpen}
+        />);
+
+    const deleteAndAddSubCategoryRender =
+        (<div className="CategoryItemPanel">
+            <CategoryDelete
+                id={id}
+                getModalConfig={getModalConfig}
+                handleModalOpen={handleModalOpen}
+            />
+            <AddSubCategory
+                id={id}
+                getModalConfig={getModalConfig}
+                handleModalOpen={handleModalOpen}
+            />
+        </div>);
+
+    const moveToCategoryRender = (
+        <div className="CategoryItemPanel">
+            <IconButton>
+                <MoveToIcon/>
+            </IconButton>
+        </div>);
+
 	const subcategoriesListRender = hasSubcategory && expanded &&
 		(<CategoryList
 			className="CategoryList"
@@ -44,40 +72,13 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 				<div className="CategoryItemPanel">
 					{ expanderRender }
 					<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-
 						{ shouldRenderCRUD
 							? <NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
 							: <span>{title}</span> }
 					</div>
-
-                    { shouldRenderCRUD && <CategoryEdit
-						itemTitle={title}
-						id={id}
-						getModalConfig={getModalConfig}
-						handleModalOpen={handleModalOpen}
-					/> }
+                    { shouldRenderCRUD && editCategoryRender }
 				</div>
-
-                { shouldRenderCRUD
-					? <div className="CategoryItemPanel">
-						<CategoryDelete
-							id={id}
-							getModalConfig={getModalConfig}
-							handleModalOpen={handleModalOpen}
-						/>
-						<AddSubCategory
-							id={id}
-							getModalConfig={getModalConfig}
-							handleModalOpen={handleModalOpen}
-						/>
-					</div>
-
-					: <div className="CategoryItemPanel">
-						<IconButton >
-							<MoveToIcon/>
-						</IconButton>
-					</div>
-                }
+                { shouldRenderCRUD ? deleteAndAddSubCategoryRender : moveToCategoryRender }
 			</div>
 			{ subcategoriesListRender }
 		</li>
