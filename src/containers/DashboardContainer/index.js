@@ -81,11 +81,13 @@ class DashboardContainer extends Component {
         this.setState({categoryList: newCategoryList});
     };
 
-    editTask = (newTaskTitle, taskToEdit) => {
+    editTask = (newTaskTitle, isCompleted, description, taskToEdit) => {
         const newCategoryList = this.state.categoryList.map(category => {
             category.todos.map(todo => {
                 if(todo.id === taskToEdit) {
-                    todo.title = newTaskTitle
+                    todo.title = newTaskTitle;
+                    todo.isCompleted = isCompleted;
+                    todo.description = description;
                 }
                 return todo;
             });

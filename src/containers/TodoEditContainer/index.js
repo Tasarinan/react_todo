@@ -7,23 +7,35 @@ import Checkbox from 'material-ui/Checkbox';
 import './TodoEdit.css';
 
 class TodoEditContainer extends Component {
-    state = {newItemTitle: ""};
+    state = {
+        newItemTitle: "",
+        isCompleted: null,
+        newDescription: ""
+    };
 
     handleTitleChange = (e) => {
         this.setState({newItemTitle: e.target.value});
     };
 
+    handleIsCompletedChange = (e) => {
+        this.setState({isCompleted: e.target.checked});
+    };
+
+    handleDescriptionChange = (e) => {
+        this.setState({newDescription: e.target.value});
+    };
+
     handleSubmit = () => {
         const { editTask, todoItem: { id } } = this.props;
-        const {newItemTitle} = this.state;
+        const {newItemTitle, isCompleted, newDescription} = this.state;
 
-        if(newItemTitle.trim()) editTask(newItemTitle, id);
+        if(newItemTitle.trim()) editTask(newItemTitle, isCompleted, newDescription, id);
 
-        this.setState({newItemTitle: ""});
+        this.setState({newItemTitle: "", isCompleted: null});
     };
 
     render () {
-        const {categoryId, todoItem: {isCompleted, title}} = this.props;
+        const {categoryId, todoItem: {isCompleted, title, description}} = this.props;
 
         return (
             <div className="TodoEdit">
@@ -34,20 +46,25 @@ class TodoEditContainer extends Component {
                         id="text-field-default"
                         defaultValue={title}
                         onChange={this.handleTitleChange}
-
                     />
                 </div>
                 <div className="TodoEditCheckboxWrap">
                     <Checkbox
                         style={{width: 'auto'}}
                         name="isCompleted"
-                        checked={isCompleted}
+                        defaultChecked={isCompleted}
+                        onChange={this.handleIsCompletedChange}
                     />
                     <span>Completed</span>
                 </div>
-                <textarea className="TodoEditTextarea" placeholder="Task description or a plan"/>
+                <textarea
+                    className="TodoEditTextarea"
+                    defaultValue={description}
+                    placeholder="Task description or a plan"
+                    onChange={this.handleDescriptionChange}
+                />
                 <div className="TodoEditButtonsWrap">
-                    <NavLink to={`${categoryId}`} className="TodoEditButtonsWrap">
+                    <NavLink to={`/${categoryId}`} className="TodoEditButtonsWrap">
                         <RaisedButton
                             label="Save changes"
                             primary
@@ -55,11 +72,14 @@ class TodoEditContainer extends Component {
                             onClick={this.handleSubmit}
                         />
                     </NavLink>
-                    <RaisedButton
-                        label="Cancel"
-                        secondary
-                        className="TodoEditButton"
-                    />
+                    <NavLink to={`/${categoryId}`} className="TodoEditButtonsWrap">
+                        <RaisedButton
+                            label="Cancel"
+                            secondary
+                            className="TodoEditButton"
+                        />
+                    </NavLink>
+
                 </div>
             </div>
         );

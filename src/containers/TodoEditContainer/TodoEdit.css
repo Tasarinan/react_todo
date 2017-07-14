@@ -15,10 +15,15 @@
 .TodoEditButton {
     margin: 0 5px;
 }
-.TodoEditTitle, .TodoEditCheckboxWrap {
+.TodoEditTitle {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin-bottom: 10px;
+}
+.TodoEditCheckboxWrap {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
 }
 .TodoEditSpan {
     color: darkcyan;
@@ -36,5 +41,6 @@
     font-size: 16px;
     resize: vertical;
     border: 2px solid rgb(0, 188, 212);
+    outline: none;
     border-radius: 3px;
 }
