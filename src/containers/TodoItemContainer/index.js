@@ -12,7 +12,7 @@ class TodoItemContainer extends Component {
         const {editTask, id} = this.props;
         const {newItemTitle} = this.state;
 
-        if(newItemTitle.trim()) editTask(newItemTitle, id);
+        if(newItemTitle.trim()) editTask(id, newItemTitle);
 
         this.setState({newItemTitle: ""});
 	};

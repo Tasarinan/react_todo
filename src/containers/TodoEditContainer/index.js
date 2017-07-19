@@ -8,9 +8,9 @@ import './TodoEdit.css';
 
 class TodoEditContainer extends Component {
     state = {
-        newItemTitle: "",
-        isCompleted: null,
-        newDescription: ""
+        newItemTitle: this.props.todoItem.title,
+        isCompleted: this.props.todoItem.isCompleted,
+        newDescription: this.props.todoItem.description
     };
 
     handleTitleChange = (e) => {
@@ -29,7 +29,7 @@ class TodoEditContainer extends Component {
         const { editTask, todoItem: { id } } = this.props;
         const {newItemTitle, isCompleted, newDescription} = this.state;
 
-        if(newItemTitle.trim()) editTask(newItemTitle, isCompleted, newDescription, id);
+        if(newItemTitle.trim()) editTask(id, newItemTitle, isCompleted, newDescription);
 
         this.setState({newItemTitle: "", isCompleted: null});
     };
@@ -49,7 +49,8 @@ class TodoEditContainer extends Component {
                     />
                 </div>
                 <div className="TodoEditCheckboxWrap">
-                    <Checkbox
+                    <input
+                        type="checkbox"
                         style={{width: 'auto'}}
                         name="isCompleted"
                         defaultChecked={isCompleted}
