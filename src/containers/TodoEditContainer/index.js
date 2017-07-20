@@ -2,36 +2,17 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import Checkbox from 'material-ui/Checkbox';
 import './TodoEdit.css';
 
 class TodoEditContainer extends Component {
-    state = {
-        newItemTitle: this.props.todoItem.title,
-        isCompleted: this.props.todoItem.isCompleted,
-        newDescription: this.props.todoItem.description
-    };
-
-    handleTitleChange = (e) => {
-        this.setState({newItemTitle: e.target.value});
-    };
-
-    handleIsCompletedChange = (e) => {
-        this.setState({isCompleted: e.target.checked});
-    };
-
-    handleDescriptionChange = (e) => {
-        this.setState({newDescription: e.target.value});
-    };
 
     handleSubmit = () => {
-        const { editTask, todoItem: { id } } = this.props;
-        const {newItemTitle, isCompleted, newDescription} = this.state;
+        const { editTask, todoItem: {id}} = this.props;
+        const title = this.title.value;
+        const isCompleted = this.isCompleted.checked;
+        const description = this.description.value;
 
-        if(newItemTitle.trim()) editTask(id, newItemTitle, isCompleted, newDescription);
-
-        this.setState({newItemTitle: "", isCompleted: null});
+        editTask(id, title, isCompleted, description);
     };
 
     render () {
@@ -41,28 +22,33 @@ class TodoEditContainer extends Component {
             <div className="TodoEdit">
                 <div className="TodoEditTitle">
                     <span className="TodoEditSpan"> Please set the task name:</span>
-                    <TextField
+                    <input
+                        type="text"
                         className="TodoEditTitleInput"
                         id="text-field-default"
                         defaultValue={title}
-                        onChange={this.handleTitleChange}
+                        ref={(title) => this.title = title}
                     />
                 </div>
                 <div className="TodoEditCheckboxWrap">
-                    <input
-                        type="checkbox"
-                        style={{width: 'auto'}}
-                        name="isCompleted"
-                        defaultChecked={isCompleted}
-                        onChange={this.handleIsCompletedChange}
-                    />
-                    <span>Completed</span>
+                    <label  className="TodoEditCheckboxlabel">
+                        <input
+                            className="TodoEditCheckbox"
+                            type="checkbox"
+                            style={{width: 'auto'}}
+                            name="isCompleted"
+                            id="isCompleted"
+                            defaultChecked={isCompleted}
+                            ref={(isCompleted) => this.isCompleted = isCompleted}
+                        />
+                        Completed
+                    </label>
                 </div>
                 <textarea
                     className="TodoEditTextarea"
                     defaultValue={description}
                     placeholder="Task description or a plan"
-                    onChange={this.handleDescriptionChange}
+                    ref={(description) => this.description = description}
                 />
                 <div className="TodoEditButtonsWrap">
                     <NavLink to={`/${categoryId}`} className="TodoEditButtonsWrap">

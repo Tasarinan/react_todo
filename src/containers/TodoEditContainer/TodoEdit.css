@@ -21,17 +21,24 @@
     margin-bottom: 10px;
 }
 .TodoEditCheckboxWrap {
+    position: relative;
     display: flex;
     align-items: center;
     margin: 20px 0;
 }
-.TodoEditSpan {
-    color: darkcyan;
-    font-size: 18px;
+.TodoEditCheckboxlabel {
+    display: flex;
 }
 .TodoEditTitleInput {
+    margin-top: 5px;
     margin-left: 20px;
     flex-grow: 1;
+    border: none;
+    border-bottom: 2px solid rgb(0, 188, 212);
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 0 5px;
+    outline: none;
 }
 .TodoEditTextarea {
     width: 70%;
