@@ -1,7 +1,7 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import CategoryTile from '../CategoryTile';
-import TodoEditContainer from '../../containers/TodoEditContainer';
+import TodoEdit from '../TodoEdit';
 import { findCurrentItem } from '../../helpers'
 import './Todo.css';
 
@@ -20,7 +20,7 @@ const Todo = ({match, categoryList, editTask, ...restProps}) => {
                     shouldRenderCRUD={false}
                     {...restProps}
                 />
-                <TodoEditContainer
+                <TodoEdit
                     categoryId={categoryId}
                     todoItem={todoItem}
                     editTask={editTask}
