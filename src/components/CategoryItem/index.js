@@ -20,7 +20,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 	const expanderRender = hasSubcategory &&
 			(<div className="CategoryItemDropdown">
 				<IconButton onClick={handleExpander}>
-					{expanded ? <ArrowDownIcon/> : <ArrowUpIcon/>}
+					{ expanded ? <ArrowDownIcon/> : <ArrowUpIcon/> }
 				</IconButton>
 			</div>);
 
@@ -68,19 +68,30 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 
 	return (
 		<li className="CategoryItem">
-			<div className="CategoryItemLine">
-				<div className="CategoryItemPanel">
-					{ expanderRender }
-					<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-						{ shouldRenderCRUD
-							? <NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
-							: <span>{title}</span> }
+            { shouldRenderCRUD
+                ? (<div className="CategoryItemLine">
+					<div className="CategoryItemPanel">
+						{ expanderRender }
+						<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
+							<NavLink to={`/${id}`} activeClassName="selected" disabled>{title}</NavLink>
+						</div>
+						{ editCategoryRender }
 					</div>
-                    { shouldRenderCRUD && editCategoryRender }
-				</div>
-                { shouldRenderCRUD ? deleteAndAddSubCategoryRender : moveToCategoryRender }
-			</div>
-			{ subcategoriesListRender }
+					{ deleteAndAddSubCategoryRender }
+				</div>)
+                : (<div className="CategoryItemLine">
+					<div className="CategoryItemPanel">
+                        { expanderRender }
+						<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
+							<NavLink to={`/${id}`} activeClassName="selected todo-edit-current">{title}</NavLink>
+							<div className="CategoryItemMoveTo">
+                                { moveToCategoryRender }
+							</div>
+						</div>
+					</div>
+				</div>)
+            }
+            { subcategoriesListRender }
 		</li>
 	)
 };

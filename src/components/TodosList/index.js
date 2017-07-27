@@ -7,10 +7,8 @@ const TodosList = ({ todosList, ...props }) => (
 	<ul className="TodosList">
 		{todosList.map((item) =>
 			<TodoItemContainer
+				todoItem={item}
 				key={item.id}
-				id={item.id}
-				title={item.title}
-				isCompleted={item.isCompleted}
 				{...props }
 			/>
 		)}

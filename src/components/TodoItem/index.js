@@ -32,6 +32,4 @@ const TodoItem = ({id, title, isCompleted, url, handleTitleChange, handleSubmit}
 	</li>
 );
 
-
-
 export default TodoItem;

@@ -4,20 +4,16 @@ import { NavLink } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import './TodoEdit.css';
 
-const TodoEdit = ({
-    categoryId,
-    editTask,
-    todoItem: {id, title, isCompleted, description},
-}) => {
+const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, description}}) => {
 
-    let editedTask = {
+    const editedTask = {
         newTitle: null,
         newIsCompleted: null,
         newDescription: null
     };
 
     const handleSubmit = () => {
-        const  { newTitle, newIsCompleted, newDescription} = editedTask;
+        const  {newTitle, newIsCompleted, newDescription} = editedTask;
 
         editTask(id, newTitle.value, newIsCompleted.checked, newDescription.value);
     };
@@ -75,5 +71,6 @@ const TodoEdit = ({
             </div>
         </div>
     );
-}
+};
+
 export default TodoEdit;

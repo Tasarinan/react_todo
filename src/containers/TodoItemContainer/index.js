@@ -9,16 +9,16 @@ class TodoItemContainer extends Component {
     };
 
     handleSubmit = () => {
-        const {editTask, id} = this.props;
+        const {editTask, todoItem: {id, isCompleted, description}} = this.props;
         const {newItemTitle} = this.state;
 
-        if(newItemTitle.trim()) editTask(id, newItemTitle);
+        if(newItemTitle.trim()) editTask(id, newItemTitle, isCompleted, description);
 
         this.setState({newItemTitle: ""});
 	};
 
     render() {
-    	const {id, title, isCompleted, url} = this.props;
+    	const {todoItem: {id, title, isCompleted}, url} = this.props;
 
         return (
             <TodoItem
