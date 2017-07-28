@@ -18,6 +18,7 @@ const Todo = ({match, categoryList, editTask, ...restProps}) => {
                 <CategoryTile
                     categoryList={categoryList}
                     shouldRenderCRUD={false}
+                    todoId={todoId}
                     {...restProps}
                 />
                 <TodoEdit

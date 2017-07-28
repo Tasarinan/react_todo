@@ -97,6 +97,28 @@ class DashboardContainer extends Component {
         this.setState({categoryList: newCategoryList});
     };
 
+	moveTaskToNewCategory = (categoryToAddNewTask, currentTask) => {
+
+        let currentTodo;
+
+		this.state.categoryList.forEach(category => category.todos.forEach(todo => {
+            if(todo.id === currentTask) currentTodo = todo;
+        }));
+
+        const newCategoryList = this.state.categoryList.map(category => {
+            category.todos = category.todos.filter(todo => todo.id !== currentTask);
+            return category
+        })
+        .map(category => {
+            if(category.id === categoryToAddNewTask) {
+                category.todos.push(currentTodo);
+            }
+            return category;
+        });
+
+		this.setState({categoryList: newCategoryList});
+    };
+
     getModalConfig = (modalConfig) => this.setState({modalConfig});
 
     handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
@@ -117,6 +139,7 @@ class DashboardContainer extends Component {
 				addNewSubcategory={this.addNewSubcategory}
                 addNewTask={this.addNewTask}
                 editTask={this.editTask}
+                moveTaskToNewCategory={this.moveTaskToNewCategory}
 				modalConfig={modalConfig}
 				getModalConfig={this.getModalConfig}
 				isModalOpen={isModalOpen}

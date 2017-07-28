@@ -6,7 +6,7 @@ import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
 
 const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory, deleteCategory, addNewSubcategory,
-     modalConfig, getModalConfig, isModalOpen, handleModalOpen, shouldRenderCRUD}) => {
+     modalConfig, getModalConfig, isModalOpen, handleModalOpen, shouldRenderCRUD, todoId, moveTaskToNewCategory}) => {
 
     return (
 		<div className="CategoryTile">
@@ -23,6 +23,8 @@ const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory
 				getModalConfig={getModalConfig}
 				handleModalOpen={handleModalOpen}
 				shouldRenderCRUD={shouldRenderCRUD}
+				todoId={todoId}
+				moveTaskToNewCategory={moveTaskToNewCategory}
 			/>
             {shouldRenderCRUD && <ModalDialogContainer
 				deleteCategory={deleteCategory}

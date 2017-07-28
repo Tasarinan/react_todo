@@ -12,8 +12,8 @@ import CategoryDelete from '../CategoryDelete';
 import CategoryEdit from '../CategoryEdit';
 import AddSubCategory from '../AddSubCategory';
 
-const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
-	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen, shouldRenderCRUD}) => {
+const  CategoryItem  = ({categoryId, categoryTitle, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
+	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen, shouldRenderCRUD, todoId, moveTaskToNewCategory}) => {
 
 	const hasSubcategory = subcategories.length !== 0;
 
@@ -30,8 +30,8 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 		</div>);
 
 	const editCategoryRender = (<CategoryEdit
-            itemTitle={title}
-            id={id}
+            itemTitle={categoryTitle}
+            id={categoryId}
             getModalConfig={getModalConfig}
             handleModalOpen={handleModalOpen}
         />);
@@ -39,12 +39,12 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
     const deleteAndAddSubCategoryRender =
         (<div className="CategoryItemPanel">
             <CategoryDelete
-                id={id}
+                id={categoryId}
                 getModalConfig={getModalConfig}
                 handleModalOpen={handleModalOpen}
             />
             <AddSubCategory
-                id={id}
+                id={categoryId}
                 getModalConfig={getModalConfig}
                 handleModalOpen={handleModalOpen}
             />
@@ -52,9 +52,14 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 
     const moveToCategoryRender = (
         <div className="CategoryItemPanel">
-            <IconButton tooltip="Move to this category">
-                <MoveToIcon/>
-            </IconButton>
+	        <NavLink
+		        to={`/${categoryId}/${todoId}/edit`}
+		        onClick={() => moveTaskToNewCategory(categoryId, todoId)}
+	        >
+		        <IconButton tooltip="Move to this category">
+			        <MoveToIcon/>
+		        </IconButton>
+	        </NavLink>
         </div>);
 
 	const subcategoriesListRender = hasSubcategory &&
@@ -69,6 +74,8 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 			getModalConfig={getModalConfig}
 			handleModalOpen={handleModalOpen}
 			shouldRenderCRUD={shouldRenderCRUD}
+			todoId={todoId}
+			moveTaskToNewCategory={moveTaskToNewCategory}
 		/>);
 
 	return (
@@ -80,7 +87,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 						<div className="CategoryItemPanel">
                             { expanderRender }
 							<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-								<NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
+								<NavLink to={`/${categoryId}`} activeClassName="selected">{categoryTitle}</NavLink>
 							</div>
                             { editCategoryRender }
 						</div>
@@ -94,7 +101,7 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 						<div className="CategoryItemPanel">
                             { expanderRender }
 							<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-								<NavLink to={`/${id}`} className="not-selectable" activeClassName="currentCategory selected">{title}</NavLink>
+								<NavLink to={`/${categoryId}`} className="not-selectable" activeClassName="currentCategory selected">{categoryTitle}</NavLink>
 								<div className="CategoryItemMoveTo">
 									{ moveToCategoryRender }
 								</div>

@@ -16,8 +16,8 @@ const CategoryList = (props) => {
 			{listToRender.map(category =>
 				<CategoryItemContainer
 					key={category.id}
-					title={category.title}
-					id={category.id}
+					categoryTitle={category.title}
+					categoryId={category.id}
 					subcategories={category.subcategories}
 					{...props}
 				/>
