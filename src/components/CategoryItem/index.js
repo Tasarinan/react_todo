@@ -18,13 +18,18 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 	const hasSubcategory = subcategories.length !== 0;
 
 	const expanderRender = hasSubcategory &&
-			(<div className="CategoryItemDropdown">
-				<IconButton onClick={handleExpander}>
-					{ expanded ? <ArrowDownIcon/> : <ArrowUpIcon/> }
-				</IconButton>
-			</div>);
+		(<div className="CategoryItemDropdown">
+			{ shouldRenderCRUD
+				? (<IconButton onClick={handleExpander}>
+                    { expanded ? <ArrowDownIcon/> : <ArrowUpIcon/> }
+				</IconButton>)
+				: (<IconButton className="not-selectable">
+					<ArrowDownIcon/>
+				</IconButton>)
+			}
+		</div>);
 
-	const editCategoryRender =  (<CategoryEdit
+	const editCategoryRender = (<CategoryEdit
             itemTitle={title}
             id={id}
             getModalConfig={getModalConfig}
@@ -47,12 +52,12 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 
     const moveToCategoryRender = (
         <div className="CategoryItemPanel">
-            <IconButton>
+            <IconButton tooltip="Move to this category">
                 <MoveToIcon/>
             </IconButton>
         </div>);
 
-	const subcategoriesListRender = hasSubcategory && expanded &&
+	const subcategoriesListRender = hasSubcategory &&
 		(<CategoryList
 			className="CategoryList"
 			categoryList={categoryList}
@@ -67,31 +72,39 @@ const  CategoryItem  = ({id, title, editCategory, deleteCategory, addNewSubcateg
 		/>);
 
 	return (
-		<li className="CategoryItem">
+		<li>
             { shouldRenderCRUD
-                ? (<div className="CategoryItemLine">
-					<div className="CategoryItemPanel">
-						{ expanderRender }
-						<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-							<NavLink to={`/${id}`} activeClassName="selected" disabled>{title}</NavLink>
+
+                ? (<div className="CategoryItem">
+					<div className="CategoryItemLine">
+						<div className="CategoryItemPanel">
+                            { expanderRender }
+							<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
+								<NavLink to={`/${id}`} activeClassName="selected">{title}</NavLink>
+							</div>
+                            { editCategoryRender }
 						</div>
-						{ editCategoryRender }
+                        { deleteAndAddSubCategoryRender }
 					</div>
-					{ deleteAndAddSubCategoryRender }
+                    { expanded && subcategoriesListRender }
 				</div>)
-                : (<div className="CategoryItemLine">
-					<div className="CategoryItemPanel">
-                        { expanderRender }
-						<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
-							<NavLink to={`/${id}`} activeClassName="selected todo-edit-current">{title}</NavLink>
-							<div className="CategoryItemMoveTo">
-                                { moveToCategoryRender }
+
+                : (<div className="CategoryItem">
+					<div className="CategoryItemLine">
+						<div className="CategoryItemPanel">
+                            { expanderRender }
+							<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
+								<NavLink to={`/${id}`} className="not-selectable" activeClassName="currentCategory selected">{title}</NavLink>
+								<div className="CategoryItemMoveTo">
+									{ moveToCategoryRender }
+								</div>
 							</div>
 						</div>
 					</div>
+					{ subcategoriesListRender }
 				</div>)
+
             }
-            { subcategoriesListRender }
 		</li>
 	)
 };

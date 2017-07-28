@@ -40,9 +40,9 @@
 .CategoryItemButton {
     margin:0 4px;
 }
-.todo-edit-current {
+.not-selectable{
     pointer-events: none;
 }
-.todo-edit-current + .CategoryItemMoveTo {
+.CategoryItemTitle .currentCategory + .CategoryItemMoveTo {
     display: none;
 }
