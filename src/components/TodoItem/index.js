@@ -3,33 +3,50 @@ import { NavLink } from 'react-router-dom';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import EditIcon from 'material-ui/svg-icons/content/create';
-import TextField from 'material-ui/TextField';
-import Checkbox from 'material-ui/Checkbox';
+
 import './TodoItem.css';
 
-const TodoItem = ({id, title, isCompleted, url, handleTitleChange, handleSubmit}) =>  (
+const TodoItem = ({editTask, url, todoItem: {id, title, isCompleted, description}}) =>  {
+
+	const editedTask = {
+		newTitle: null,
+		newIsCompleted: null
+	};
+
+	const handleSubmit = () => {
+		const {newTitle, newIsCompleted} = editedTask;
+
+		editTask(id, newTitle.value, newIsCompleted.checked, description);
+	};
+
+	return (
 	<li className="TodoItem">
 		<div className="TodoItemName">
-			<Checkbox
+			<input
+				className="TodoEditCheckbox"
+				type="checkbox"
 				style={{width: 'auto'}}
 				name="isCompleted"
-				checked={isCompleted}
-				disabled
+				id="isCompleted"
+				defaultChecked={isCompleted}
+				ref={(isCompleted) => editedTask.newIsCompleted = isCompleted}
+				onBlur={handleSubmit}
 			/>
-			<TextField
-				className="TodoItemTitle"
+			<input
+				type="text"
+				className="TodoEditTitleInput"
 				id="text-field-default"
 				defaultValue={title}
-				onChange={handleTitleChange}
-				onBlur={handleSubmit}
+				ref={(title) => editedTask.newTitle = title}
+			    onBlur={handleSubmit}
 			/>
 		</div>
 		<NavLink to={`${url}/${id}/edit`} activeClassName="selected">
-			<FloatingActionButton className="CategoryItemButton" backgroundColor={"#78909C"} mini>
+			<FloatingActionButton className="CategoryItemButton" backgroundColor={'#78909C'} mini>
 				<EditIcon />
 			</FloatingActionButton>
 		</NavLink>
 	</li>
-);
+)};
 
 export default TodoItem;

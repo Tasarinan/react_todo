@@ -6,23 +6,24 @@ import './TodoEdit.css';
 
 const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, description}}) => {
 
-    const editedTask = {
-        newTitle: null,
-        newIsCompleted: null,
-        newDescription: null
-    };
+	const editedTask = {
+		newTitle: null,
+		newIsCompleted: null,
+		newDescription: null
+	};
 
-    const handleSubmit = () => {
-        const  {newTitle, newIsCompleted, newDescription} = editedTask;
+	const handleSubmit = () => {
+		const {newTitle, newIsCompleted, newDescription} = editedTask;
 
-        editTask(id, newTitle.value, newIsCompleted.checked, newDescription.value);
-    };
+		editTask(id, newTitle.value, newIsCompleted.checked, newDescription.value);
+	};
 
 
-    return (
+	return (
         <div className="TodoEdit">
+            <h1 className="TodoEditMainTitle">Task details:</h1>
             <div className="TodoEditTitle">
-                <span className="TodoEditSpan"> Please set the task name:</span>
+                <span className="TodoEditSpan">Please set the task name:</span>
                 <input
                     type="text"
                     className="TodoEditTitleInput"
@@ -32,7 +33,7 @@ const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, des
                 />
             </div>
             <div className="TodoEditCheckboxWrap">
-                <label  className="TodoEditCheckboxlabel">
+                <label className="TodoEditCheckboxlabel">
                     <input
                         className="TodoEditCheckbox"
                         type="checkbox"
@@ -45,6 +46,7 @@ const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, des
                     Completed
                 </label>
             </div>
+            <h3 className="TodoEditDescTitle">Commentary: </h3>
             <textarea
                 className="TodoEditTextarea"
                 defaultValue={description}
@@ -67,10 +69,9 @@ const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, des
                         className="TodoEditButton"
                     />
                 </NavLink>
-
             </div>
         </div>
-    );
+	);
 };
 
 export default TodoEdit;

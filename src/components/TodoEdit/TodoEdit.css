@@ -15,10 +15,16 @@
 .TodoEditButton {
     margin: 0 5px;
 }
+.TodoEditMainTitle {
+    margin-top: 0;
+}
 .TodoEditTitle {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+.TodoEditDescTitle {
+    margin-bottom: 0;
 }
 .TodoEditCheckboxWrap {
     position: relative;
@@ -30,12 +36,10 @@
     display: flex;
 }
 .TodoEditTitleInput {
-    margin-top: 5px;
-    margin-left: 20px;
+    margin: 5px 10px 0 10px;
     flex-grow: 1;
     border: none;
     border-bottom: 2px solid rgb(0, 188, 212);
-    border-radius: 3px;
     font-size: 16px;
     padding: 0 5px;
     outline: none;

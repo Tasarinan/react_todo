@@ -1,12 +1,12 @@
 import React from 'react';
-import './TodosList.css'
+import './TodosList.css';
 
-import TodoItemContainer from '../../containers/TodoItemContainer';
+import TodoItem from '../TodoItem';
 
 const TodosList = ({ todosList, ...props }) => (
 	<ul className="TodosList">
 		{todosList.map((item) =>
-			<TodoItemContainer
+			<TodoItem
 				todoItem={item}
 				key={item.id}
 				{...props }
