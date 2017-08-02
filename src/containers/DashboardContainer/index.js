@@ -13,6 +13,7 @@ class DashboardContainer extends Component {
             title: ""
         },
         isModalOpen: false,
+        isShowDoneChecked: false,
     };
 
     static createNewCategory(newTitle, isRoot) {
@@ -32,6 +33,18 @@ class DashboardContainer extends Component {
             isCompleted: false
         };
     }
+
+    checkCompleted = (newIsShowDoneChecked) => {
+        if(newIsShowDoneChecked) {
+            const newCategoryList = this.state.categoryList.map(category => {
+                category.todos = category.todos.filter(todo => todo.isCompleted);
+                return category;
+            });
+            this.setState({isShowDoneChecked: newIsShowDoneChecked, categoryList: newCategoryList})
+        }
+
+        this.setState({isShowDoneChecked: newIsShowDoneChecked})
+    };
 
     addNewCategory = (newCategoryTitle) => {
         const newCategoryList = [DashboardContainer.createNewCategory(newCategoryTitle, true), ...this.state.categoryList];
@@ -124,7 +137,7 @@ class DashboardContainer extends Component {
     handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
 
     render() {
-        const {categoryList, modalConfig, isModalOpen} = this.state;
+        const {categoryList, modalConfig, isModalOpen, isShowDoneChecked} = this.state;
         const itemsToRender = categoryList
             .filter(cat => cat.root)
             .map(cat => cat.id);
@@ -133,6 +146,8 @@ class DashboardContainer extends Component {
         	<Dashboard
 				categoryList={categoryList}
 				itemsToRender={itemsToRender}
+                isShowDoneChecked={isShowDoneChecked}
+                checkCompleted={this.checkCompleted}
                 addNewCategory={this.addNewCategory}
 				editCategory={this.editCategory}
 				deleteCategory={this.deleteCategory}

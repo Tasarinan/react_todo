@@ -11,9 +11,13 @@ import ProgressBar from "../ProgressBar";
 import CategoryTile from '../CategoryTile';
 import TodoTile from '../TodoTile';
 
-const Category = ({categoryList, addNewTask, editTask, ...restProps}) => (
+const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, editTask, ...restProps}) => (
     <div>
-        <MainHeader categoryList={categoryList}/>
+        <MainHeader
+            categoryList={categoryList}
+            isShowDoneChecked={isShowDoneChecked}
+            checkCompleted={checkCompleted}
+        />
         <ProgressBar categoryList={categoryList}/>
         <div className="Category">
             <CategoryTile

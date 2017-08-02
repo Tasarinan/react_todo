@@ -1,39 +1,32 @@
 import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 
-class ProgressBar extends React.Component {
+const ProgressBar = ({categoryList}) => {
 
-	constructor(props) {
-		super(props);
+	const progressCompleted = () => {
+        let totalCategories = 0;
+        let completedCategories = 0;
 
-		this.state = {
-			trued: 0,
-		};
-	}
+        categoryList.map(category => {
+            if(category.todos.length !==0){
+                let filtered  = category.todos.filter(todo => !todo.isCompleted);
+                if(filtered.length ===0){
+                    completedCategories +=1;
+				}
+                totalCategories +=1;
+                return category;
+            }
+            completedCategories +=1;
+            totalCategories +=1;
+            return category;
+        });
 
-	componentDidMount() {
-		this.timer = setTimeout(() => this.progress(5), 1000);
-	}
+        return completedCategories / totalCategories * 100;
+    };
 
-	componentWillUnmount() {
-		clearTimeout(this.timer);
-	}
-
-	progress(trued) {
-		if (trued > 100) {
-			this.setState({trued: 100});
-		} else {
-			this.setState({trued});
-			const diff = Math.random() * 10;
-			this.timer = setTimeout(() => this.progress(trued + diff), 1000);
-		}
-	}
-
-	render() {
-		return (
-			<LinearProgress color={"orange"} mode="determinate" value={this.state.trued} />
-		);
-	}
-}
+	return (
+		<LinearProgress color={"orange"} mode="determinate" value={progressCompleted()} />
+	);
+};
 
 export default ProgressBar;

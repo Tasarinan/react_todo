@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import Checkbox from 'material-ui/Checkbox';
+const ShowFilter = ({isShowDoneChecked, checkCompleted}) => {
+	let newIsShowDoneChecked;
 
-class ShowFilter extends Component {
-	render() {
-		return (
-			<div className="ShowFilter">
-				<Checkbox
-					label="Show Done"
-				/>
-			</div>
-		);
-	}
-}
+	const showDone = () => {
+        checkCompleted(newIsShowDoneChecked.checked)
+	};
+
+	return (
+		<div className="ShowFilter">
+			<input
+				id="ShowFilter"
+				type="checkbox"
+				defaultChecked={isShowDoneChecked}
+				ref={(isShowDoneChecked) => newIsShowDoneChecked = isShowDoneChecked}
+				onChange={showDone}
+			/>
+			<label htmlFor="ShowFilter">Show Done</label>
+		</div>
+	);
+};
 
 export default ShowFilter;

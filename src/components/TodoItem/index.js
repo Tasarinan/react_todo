@@ -30,7 +30,7 @@ const TodoItem = ({editTask, url, todoItem: {id, title, isCompleted, description
 				id="isCompleted"
 				defaultChecked={isCompleted}
 				ref={(isCompleted) => editedTask.newIsCompleted = isCompleted}
-				onBlur={handleSubmit}
+				onChange={handleSubmit}
 			/>
 			<input
 				type="text"

@@ -3,14 +3,12 @@ import AppBar from 'material-ui/AppBar';
 import './MainHeader.css';
 
 import ShowFilter from '../ShowFilter';
-import PageSearch from '../PageSearch';
 
-const MainHeader = () =>
+const MainHeader = (props) =>
 	<div className="MainHeader">
 		<AppBar title="To-Do List" />
 		<div className="NavWrapper">
-			<ShowFilter/>
-			<PageSearch/>
+			<ShowFilter {...props}/>
 		</div>
 	</div>;
 
