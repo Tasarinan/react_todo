@@ -2,7 +2,6 @@ import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 
 const ProgressBar = ({categoryList}) => {
-
 	const progressCompleted = () => {
         let totalCategories = 0;
         let completedCategories = 0;
@@ -10,6 +9,7 @@ const ProgressBar = ({categoryList}) => {
         categoryList.map(category => {
             if(category.todos.length !==0){
                 let filtered  = category.todos.filter(todo => !todo.isCompleted);
+
                 if(filtered.length ===0){
                     completedCategories +=1;
 				}
@@ -18,6 +18,7 @@ const ProgressBar = ({categoryList}) => {
             }
             completedCategories +=1;
             totalCategories +=1;
+
             return category;
         });
 
