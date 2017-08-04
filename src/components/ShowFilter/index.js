@@ -4,7 +4,7 @@ const ShowFilter = ({isShowDoneChecked, checkCompleted}) => {
 	let newIsShowDoneChecked;
 
 	const showDone = () => {
-        checkCompleted(newIsShowDoneChecked.checked)
+        checkCompleted(newIsShowDoneChecked.checked);
 	};
 
 	return (
