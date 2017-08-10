@@ -4,7 +4,12 @@ import './CategoryList.css'
 import CategoryItemContainer from '../../containers/CategoryItemContainer';
 
 const CategoryList = (props) => {
-	const {categoryList, itemsToRender} = props;
+
+	const {categoryList} = props;
+    const itemsToRender = categoryList
+        .filter(cat => cat.root)
+        .map(cat => cat.id);
+
 	const listToRender = [];
 
     itemsToRender.map(item => categoryList.forEach(cat => {

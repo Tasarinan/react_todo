@@ -1,7 +1,7 @@
 import React from 'react';
 import './CategoryTile.css';
 
-import ItemAdderContainer from '../../containers/ItemAdderContainer';
+import CategoryAdderContainer from '../../containers/CategoryAdderContainer';
 import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
 
@@ -10,10 +10,7 @@ const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory
 
     return (
 		<div className="CategoryTile">
-			{shouldRenderCRUD && <ItemAdderContainer
-				addNewItem={addNewCategory}
-				placeholder={"Enter Category Title"}
-			/>}
+			{shouldRenderCRUD && <CategoryAdderContainer/>}
 			<CategoryList
 				categoryList={categoryList}
 				itemsToRender={itemsToRender}
@@ -26,14 +23,14 @@ const CategoryTile = ({categoryList, itemsToRender, addNewCategory, editCategory
 				todoId={todoId}
 				moveTaskToNewCategory={moveTaskToNewCategory}
 			/>
-            {shouldRenderCRUD && <ModalDialogContainer
-				deleteCategory={deleteCategory}
-				editCategory={editCategory}
-				addNewSubcategory={addNewSubcategory}
-				modalConfig={modalConfig}
-				isModalOpen={isModalOpen}
-				handleModalOpen={handleModalOpen}
-			/>}
+            {/*{shouldRenderCRUD && <ModalDialogContainer*/}
+				{/*deleteCategory={deleteCategory}*/}
+				{/*editCategory={editCategory}*/}
+				{/*addNewSubcategory={addNewSubcategory}*/}
+				{/*modalConfig={modalConfig}*/}
+				{/*isModalOpen={isModalOpen}*/}
+				{/*handleModalOpen={handleModalOpen}*/}
+			{/*/>}*/}
 		</div>
     );
 };

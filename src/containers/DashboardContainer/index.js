@@ -1,167 +1,177 @@
-import React, {Component} from 'react';
-
-import data from '../../data/data.json';
+import { connect } from 'react-redux';
 import Dashboard from '../../components/Dashboard';
 
-class DashboardContainer extends Component {
-    state = {
-        categoryList: data,
-        modalConfig: {
-            itemTitle: "",
-            focusedItem: null,
-            mode: "",
-            title: ""
-        },
-        isModalOpen: false,
-        isShowDoneChecked: false,
-    };
-
-    static createNewCategory(newTitle, isRoot) {
-        return {
-            id: Date.now(),
-            title: newTitle,
-            todos: [],
-            root: isRoot,
-            subcategories: []
-        };
+const mapStateToProps = (state) => {
+    return {
+        categoryList: state.categoryList
     }
+};
 
-    static createNewTask(newTitle) {
-        return {
-            id: Date.now(),
-            title: newTitle,
-            isCompleted: false
-        };
-    }
-
-    checkCompleted = (newIsShowDoneChecked) => {
-        if(newIsShowDoneChecked) {
-            const newCategoryList = this.state.categoryList.map(category => {
-                category.todos = category.todos.filter(todo => todo.isCompleted);
-                return category;
-            });
-            this.setState({isShowDoneChecked: newIsShowDoneChecked, categoryList: newCategoryList})
-        }
-
-        this.setState({isShowDoneChecked: newIsShowDoneChecked})
-    };
-
-    addNewCategory = (newCategoryTitle) => {
-        const newCategoryList = [DashboardContainer.createNewCategory(newCategoryTitle, true), ...this.state.categoryList];
-        this.setState({categoryList: newCategoryList});
-    };
-
-    addNewSubcategory = (newSubcategoryTitle, categoryToAddSub) => {
-        const newSubcategory = DashboardContainer.createNewCategory(newSubcategoryTitle, false);
-        const newCategoryList = [newSubcategory, ...this.state.categoryList.map(category => {
-            return category.id === categoryToAddSub
-                ? Object.assign({}, category, {subcategories: [newSubcategory.id, ...category.subcategories]})
-                : category
-        })];
-        this.setState({categoryList: newCategoryList});
-    };
-
-    editCategory = (newCategoryTitle, categoryToEdit) => {
-        const newCategoryList = this.state.categoryList.map(category => {
-            if(category.id === categoryToEdit) {
-                category.title = newCategoryTitle
-            }
-            return category;
-        });
-
-        this.setState({categoryList: newCategoryList});
-    };
-
-    deleteCategory = (categoryToDelete) => {
-        const newCategoryList = this.state.categoryList.map(category => {
-            if(category.subcategories.includes(categoryToDelete)) {
-                category.subcategories = category.subcategories.filter(sub => sub !== categoryToDelete);
-            }
-            return category;
-        }).filter(category => category.id !== categoryToDelete);
-
-        this.setState({categoryList: newCategoryList});
-    };
-
-    addNewTask = (newTaskTitle, categoryToAddTask) => {
-        const newCategoryList = this.state.categoryList.map(category => {
-            if(category.id === categoryToAddTask) {
-                category.todos = [ ...category.todos, DashboardContainer.createNewTask(newTaskTitle)]
-            }
-            return category;
-        });
-
-        this.setState({categoryList: newCategoryList});
-    };
-
-    editTask = (taskToEdit, newTaskTitle, isCompleted, description) => {
-        const newCategoryList = this.state.categoryList.map(category => {
-            category.todos.map(todo => {
-                if(todo.id === taskToEdit) {
-                    todo.title = newTaskTitle;
-                    todo.isCompleted = isCompleted;
-                    todo.description = description;
-                }
-                return todo;
-            });
-            return category;
-        });
-
-        this.setState({categoryList: newCategoryList});
-    };
-
-	moveTaskToNewCategory = (categoryToAddNewTask, currentTask) => {
-
-        let currentTodo;
-
-		this.state.categoryList.forEach(category => category.todos.forEach(todo => {
-            if(todo.id === currentTask) currentTodo = todo;
-        }));
-
-        const newCategoryList = this.state.categoryList.map(category => {
-            category.todos = category.todos.filter(todo => todo.id !== currentTask);
-            return category
-        })
-        .map(category => {
-            if(category.id === categoryToAddNewTask) {
-                category.todos.push(currentTodo);
-            }
-            return category;
-        });
-
-		this.setState({categoryList: newCategoryList});
-    };
-
-    getModalConfig = (modalConfig) => this.setState({modalConfig});
-
-    handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
-
-    render() {
-        const {categoryList, modalConfig, isModalOpen, isShowDoneChecked} = this.state;
-        const itemsToRender = categoryList
-            .filter(cat => cat.root)
-            .map(cat => cat.id);
-
-        return (
-        	<Dashboard
-				categoryList={categoryList}
-				itemsToRender={itemsToRender}
-                isShowDoneChecked={isShowDoneChecked}
-                checkCompleted={this.checkCompleted}
-                addNewCategory={this.addNewCategory}
-				editCategory={this.editCategory}
-				deleteCategory={this.deleteCategory}
-				addNewSubcategory={this.addNewSubcategory}
-                addNewTask={this.addNewTask}
-                editTask={this.editTask}
-                moveTaskToNewCategory={this.moveTaskToNewCategory}
-				modalConfig={modalConfig}
-				getModalConfig={this.getModalConfig}
-				isModalOpen={isModalOpen}
-				handleModalOpen={this.handleModalOpen}
-			/>
-        );
-    }
-}
+const DashboardContainer = connect(
+    mapStateToProps,
+)(Dashboard);
 
 export default DashboardContainer;
+
+// class DashboardContainer extends Component {
+//     state = {
+//         categoryList: data,
+//         modalConfig: {
+//             itemTitle: "",
+//             focusedItem: null,
+//             mode: "",
+//             title: ""
+//         },
+//         isModalOpen: false,
+//         isShowDoneChecked: false,
+//     };
+//
+//     static createNewCategory(newTitle, isRoot) {
+//         return {
+//             id: Date.now(),
+//             title: newTitle,
+//             todos: [],
+//             root: isRoot,
+//             subcategories: []
+//         };
+//     }
+//
+//     static createNewTask(newTitle) {
+//         return {
+//             id: Date.now(),
+//             title: newTitle,
+//             isCompleted: false
+//         };
+//     }
+//
+//     checkCompleted = (newIsShowDoneChecked) => {
+//         if(newIsShowDoneChecked) {
+//             const newCategoryList = this.state.categoryList.map(category => {
+//                 category.todos = category.todos.filter(todo => todo.isCompleted);
+//                 return category;
+//             });
+//             this.setState({isShowDoneChecked: newIsShowDoneChecked, categoryList: newCategoryList})
+//         }
+//
+//         this.setState({isShowDoneChecked: newIsShowDoneChecked})
+//     };
+//
+//     addNewCategory = (newCategoryTitle) => {
+//         const newCategoryList = [DashboardContainer.createNewCategory(newCategoryTitle, true), ...this.state.categoryList];
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+//     addNewSubcategory = (newSubcategoryTitle, categoryToAddSub) => {
+//         const newSubcategory = DashboardContainer.createNewCategory(newSubcategoryTitle, false);
+//         const newCategoryList = [newSubcategory, ...this.state.categoryList.map(category => {
+//             return category.id === categoryToAddSub
+//                 ? Object.assign({}, category, {subcategories: [newSubcategory.id, ...category.subcategories]})
+//                 : category
+//         })];
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+//     editCategory = (newCategoryTitle, categoryToEdit) => {
+//         const newCategoryList = this.state.categoryList.map(category => {
+//             if(category.id === categoryToEdit) {
+//                 category.title = newCategoryTitle
+//             }
+//             return category;
+//         });
+//
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+//     deleteCategory = (categoryToDelete) => {
+//         const newCategoryList = this.state.categoryList.map(category => {
+//             if(category.subcategories.includes(categoryToDelete)) {
+//                 category.subcategories = category.subcategories.filter(sub => sub !== categoryToDelete);
+//             }
+//             return category;
+//         }).filter(category => category.id !== categoryToDelete);
+//
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+//     addNewTask = (newTaskTitle, categoryToAddTask) => {
+//         const newCategoryList = this.state.categoryList.map(category => {
+//             if(category.id === categoryToAddTask) {
+//                 category.todos = [ ...category.todos, DashboardContainer.createNewTask(newTaskTitle)]
+//             }
+//             return category;
+//         });
+//
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+//     editTask = (taskToEdit, newTaskTitle, isCompleted, description) => {
+//         const newCategoryList = this.state.categoryList.map(category => {
+//             category.todos.map(todo => {
+//                 if(todo.id === taskToEdit) {
+//                     todo.title = newTaskTitle;
+//                     todo.isCompleted = isCompleted;
+//                     todo.description = description;
+//                 }
+//                 return todo;
+//             });
+//             return category;
+//         });
+//
+//         this.setState({categoryList: newCategoryList});
+//     };
+//
+// 	moveTaskToNewCategory = (categoryToAddNewTask, currentTask) => {
+//
+//         let currentTodo;
+//
+// 		this.state.categoryList.forEach(category => category.todos.forEach(todo => {
+//             if(todo.id === currentTask) currentTodo = todo;
+//         }));
+//
+//         const newCategoryList = this.state.categoryList.map(category => {
+//             category.todos = category.todos.filter(todo => todo.id !== currentTask);
+//             return category
+//         })
+//         .map(category => {
+//             if(category.id === categoryToAddNewTask) {
+//                 category.todos.push(currentTodo);
+//             }
+//             return category;
+//         });
+//
+// 		this.setState({categoryList: newCategoryList});
+//     };
+//
+//     getModalConfig = (modalConfig) => this.setState({modalConfig});
+//
+//     handleModalOpen = () => this.setState(prevState => ({isModalOpen: !prevState.isModalOpen}));
+//
+//     render() {
+//         const {categoryList, modalConfig, isModalOpen, isShowDoneChecked} = this.state;
+//         const itemsToRender = categoryList
+//             .filter(cat => cat.root)
+//             .map(cat => cat.id);
+//
+//         return (
+//         	<Dashboard
+// 				categoryList={categoryList}
+// 				itemsToRender={itemsToRender}
+//                 isShowDoneChecked={isShowDoneChecked}
+//                 checkCompleted={this.checkCompleted}
+//                 addNewCategory={this.addNewCategory}
+// 				editCategory={this.editCategory}
+// 				deleteCategory={this.deleteCategory}
+// 				addNewSubcategory={this.addNewSubcategory}
+//                 addNewTask={this.addNewTask}
+//                 editTask={this.editTask}
+//                 moveTaskToNewCategory={this.moveTaskToNewCategory}
+// 				modalConfig={modalConfig}
+// 				getModalConfig={this.getModalConfig}
+// 				isModalOpen={isModalOpen}
+// 				handleModalOpen={this.handleModalOpen}
+// 			/>
+//         );
+//     }
+// }
+
+

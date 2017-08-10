@@ -18,7 +18,7 @@ const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, 
             isShowDoneChecked={isShowDoneChecked}
             checkCompleted={checkCompleted}
         />
-        <ProgressBar categoryList={categoryList}/>
+        {/*<ProgressBar categoryList={categoryList}/>*/}
         <div className="Category">
             <CategoryTile
                 categoryList={categoryList}

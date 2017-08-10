@@ -14,9 +14,8 @@ const Dashboard = (props) => {
 			<Switch>
 				<Route
 					path="/:categoryId/:todoId/edit"
-					render={(routeProps) => (
-						<Todo {...props} {...routeProps}/>
-                    )}/>
+					render={ (routeProps) => (<Todo {...props} {...routeProps}/>) }
+				/>
 				<Route render={ () => <Category {...props}/> }/>
 			</Switch>
 		</BrowserRouter>
