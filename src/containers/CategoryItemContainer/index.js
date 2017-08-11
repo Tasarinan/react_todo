@@ -1,22 +1,33 @@
-import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import CategoryItem from '../../components/CategoryItem';
+import {
+    addNewSubcategory,
+    editCategory,
+    deleteCategory,
+    openModal,
+    getModalConfig
+} from '../../actions';
 
-class CategoryItemContainer  extends Component {
-    state = {
-        expanded: false,
-    };
-
-    handleExpander = () => this.setState(prevState => ({ expanded: !prevState.expanded }));
-
-    render() {
-        const {expanded} = this.state;
-        return (
-            <CategoryItem
-                expanded={expanded}
-                handleExpander={this.handleExpander}
-                {...this.props}
-            />)
+const mapStateToProps = (state) => {
+    return {
+        modalConfig: state.modalConfig,
+        isModalOpen: state.isModalOpen,
     }
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewSubcategory: (newSubcategoryTitle, categoryToAddSub) => dispatch(addNewSubcategory(newSubcategoryTitle, categoryToAddSub)),
+        editCategory: (newCategoryTitle, categoryToEdit) => dispatch(editCategory(newCategoryTitle, categoryToEdit)),
+        deleteCategory: (categoryToDelete) => dispatch(deleteCategory(categoryToDelete)),
+        getModalConfig: (modalConfig) => dispatch(getModalConfig(modalConfig)),
+        handleModalOpen: (isModalOpen) => dispatch(openModal(isModalOpen))
+    }
+};
+
+const CategoryItemContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryItem);
 
 export default CategoryItemContainer;

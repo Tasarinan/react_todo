@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import IconButton from 'material-ui/IconButton';
 import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import ArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
@@ -12,77 +12,87 @@ import CategoryDelete from '../CategoryDelete';
 import CategoryEdit from '../CategoryEdit';
 import AddSubCategory from '../AddSubCategory';
 
-const  CategoryItem  = ({categoryId, categoryTitle, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
-	expanded, handleExpander, modalConfig, getModalConfig, handleModalOpen, shouldRenderCRUD, todoId, moveTaskToNewCategory}) => {
+class CategoryItem  extends Component {
+    state = {
+        expanded: false,
+    };
 
-	const hasSubcategory = subcategories.length !== 0;
+    handleExpander = () => this.setState(prevState => ({ expanded: !prevState.expanded }));
 
-	const expanderRender = hasSubcategory &&
-		(<div className="CategoryItemDropdown">
-			{ shouldRenderCRUD
-				? (<IconButton onClick={handleExpander}>
+    render() {
+    	const {categoryId, categoryTitle, editCategory, deleteCategory, addNewSubcategory, categoryList, subcategories,
+			modalConfig, getModalConfig, handleModalOpen, shouldRenderCRUD, todoId, moveTaskToNewCategory} = this.props;
+
+        const {expanded} = this.state;
+
+        const hasSubcategory = subcategories.length !== 0;
+
+        const expanderRender = hasSubcategory &&
+            (<div className="CategoryItemDropdown">
+                { shouldRenderCRUD
+                    ? (<IconButton onClick={this.handleExpander}>
                     { expanded ? <ArrowDownIcon/> : <ArrowUpIcon/> }
 				</IconButton>)
-				: (<IconButton className="not-selectable">
+                    : (<IconButton className="not-selectable">
 					<ArrowDownIcon/>
 				</IconButton>)
-			}
-		</div>);
+                }
+			</div>);
 
-	const editCategoryRender = (<CategoryEdit
-            itemTitle={categoryTitle}
-            id={categoryId}
-            getModalConfig={getModalConfig}
-            handleModalOpen={handleModalOpen}
-        />);
-
-    const deleteAndAddSubCategoryRender =
-        (<div className="CategoryItemPanel">
-            <CategoryDelete
-                id={categoryId}
-                getModalConfig={getModalConfig}
-                handleModalOpen={handleModalOpen}
-            />
-            <AddSubCategory
-                id={categoryId}
-                getModalConfig={getModalConfig}
-                handleModalOpen={handleModalOpen}
-            />
-        </div>);
-
-    const moveToCategoryRender = (
-        <div className="CategoryItemPanel">
-	        <NavLink
-		        to={`/${categoryId}/${todoId}/edit`}
-		        onClick={() => moveTaskToNewCategory(categoryId, todoId)}
-	        >
-		        <IconButton tooltip="Move to this category">
-			        <MoveToIcon/>
-		        </IconButton>
-	        </NavLink>
-        </div>);
-
-	const subcategoriesListRender = hasSubcategory &&
-		(<CategoryList
-			className="CategoryList"
-			categoryList={categoryList}
-			itemsToRender={subcategories}
-			editCategory={editCategory}
-			deleteCategory={deleteCategory}
-			addNewSubcategory={addNewSubcategory}
-			modalConfig={modalConfig}
+        const editCategoryRender = (<CategoryEdit
+			itemTitle={categoryTitle}
+			id={categoryId}
 			getModalConfig={getModalConfig}
 			handleModalOpen={handleModalOpen}
-			shouldRenderCRUD={shouldRenderCRUD}
-			todoId={todoId}
-			moveTaskToNewCategory={moveTaskToNewCategory}
 		/>);
 
-	return (
-		<li>
-            { shouldRenderCRUD
+        const deleteAndAddSubCategoryRender =
+            (<div className="CategoryItemPanel">
+				<CategoryDelete
+					id={categoryId}
+					getModalConfig={getModalConfig}
+					handleModalOpen={handleModalOpen}
+				/>
+				<AddSubCategory
+					id={categoryId}
+					getModalConfig={getModalConfig}
+					handleModalOpen={handleModalOpen}
+				/>
+			</div>);
 
-                ? (<div className="CategoryItem">
+        const moveToCategoryRender = (
+			<div className="CategoryItemPanel">
+				<NavLink
+					to={`/${categoryId}/${todoId}/edit`}
+					onClick={() => moveTaskToNewCategory(categoryId, todoId)}
+				>
+					<IconButton tooltip="Move to this category">
+						<MoveToIcon/>
+					</IconButton>
+				</NavLink>
+			</div>);
+
+        const subcategoriesListRender = hasSubcategory &&
+            (<CategoryList
+				className="CategoryList"
+				categoryList={categoryList}
+				itemsToRender={subcategories}
+				editCategory={editCategory}
+				deleteCategory={deleteCategory}
+				addNewSubcategory={addNewSubcategory}
+				modalConfig={modalConfig}
+				getModalConfig={getModalConfig}
+				handleModalOpen={handleModalOpen}
+				shouldRenderCRUD={shouldRenderCRUD}
+				todoId={todoId}
+				moveTaskToNewCategory={moveTaskToNewCategory}
+			/>);
+
+        return (
+			<li>
+                { shouldRenderCRUD
+
+                    ? (<div className="CategoryItem">
 					<div className="CategoryItemLine">
 						<div className="CategoryItemPanel">
                             { expanderRender }
@@ -96,24 +106,26 @@ const  CategoryItem  = ({categoryId, categoryTitle, editCategory, deleteCategory
                     { expanded && subcategoriesListRender }
 				</div>)
 
-                : (<div className="CategoryItem">
+                    : (<div className="CategoryItem">
 					<div className="CategoryItemLine">
 						<div className="CategoryItemPanel">
                             { expanderRender }
 							<div className={"CategoryItemTitle" + (hasSubcategory ? " CategoryItemTitle--hasSub" : "")}>
 								<NavLink to={`/${categoryId}`} className="not-selectable" activeClassName="currentCategory selected">{categoryTitle}</NavLink>
 								<div className="CategoryItemMoveTo">
-									{ moveToCategoryRender }
+                                    { moveToCategoryRender }
 								</div>
 							</div>
 						</div>
 					</div>
-					{ subcategoriesListRender }
+                    { subcategoriesListRender }
 				</div>)
 
-            }
-		</li>
-	)
-};
+                }
+			</li>
+        )
+    }
+}
+
 
 export default CategoryItem;

@@ -5,16 +5,12 @@ import CategoryItemContainer from '../../containers/CategoryItemContainer';
 
 const CategoryList = (props) => {
 
-	const {categoryList} = props;
-    const itemsToRender = categoryList
-        .filter(cat => cat.root)
-        .map(cat => cat.id);
-
-	const listToRender = [];
+    const {categoryList, itemsToRender} = props;
+    const listToRender = [];
 
     itemsToRender.map(item => categoryList.forEach(cat => {
-		if(cat.id === item) listToRender.push(cat);
-	}));
+        if(cat.id === item) listToRender.push(cat);
+    }));
 
 	return (
 		<ul className="CategoryList">

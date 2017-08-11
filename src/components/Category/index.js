@@ -11,30 +11,37 @@ import ProgressBar from "../ProgressBar";
 import CategoryTile from '../CategoryTile';
 import TodoTile from '../TodoTile';
 
-const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, editTask, ...restProps}) => (
-    <div>
-        <MainHeader
-            categoryList={categoryList}
-            isShowDoneChecked={isShowDoneChecked}
-            checkCompleted={checkCompleted}
-        />
-        {/*<ProgressBar categoryList={categoryList}/>*/}
-        <div className="Category">
-            <CategoryTile
+const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, editTask, ...restProps}) => {
+    const itemsToRender = categoryList
+        .filter(cat => cat.root)
+        .map(cat => cat.id);
+
+    return (
+        <div>
+            <MainHeader
                 categoryList={categoryList}
-                shouldRenderCRUD
-                {...restProps}
+                isShowDoneChecked={isShowDoneChecked}
+                checkCompleted={checkCompleted}
             />
-            <Switch>
-                <Route path="/:categoryId"
-                       render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask} {...routeProps} />}
+            {/*<ProgressBar categoryList={categoryList}/>*/}
+            <div className="Category">
+                <CategoryTile
+                    categoryList={categoryList}
+                    shouldRenderCRUD
+                    itemsToRender={itemsToRender}
+                    {...restProps}
                 />
-                <Route render={() => (
-                    <p>Please select an todo item to see it subtasks</p>
-                )}/>
-            </Switch>
+                <Switch>
+                    <Route path="/:categoryId"
+                           render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask} {...routeProps} />}
+                    />
+                    <Route render={() => (
+                        <p>Please select an todo item to see it subtasks</p>
+                    )}/>
+                </Switch>
+            </div>
         </div>
-    </div>
-);
+    )
+};
 
 export default Category;
