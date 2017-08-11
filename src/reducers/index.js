@@ -1,4 +1,4 @@
-import data from '../data/data.json';
+import data from '../data';
 import {
     ADD_NEW_CATEGORY,
     ADD_NEW_SUBCATEGORY,
@@ -34,7 +34,7 @@ const todoApp = (state = initialState, action = {}) => {
 
         case ADD_NEW_SUBCATEGORY:
             const newSubcategory = createNewCategory(action.newSubcategoryTitle, false);
-            newCategoryList = [newSubcategory, ...initialState.categoryList.map(category => {
+            newCategoryList = [newSubcategory, ...state.categoryList.map(category => {
                 return category.id === action.categoryToAddSub
                     ? Object.assign({}, category, {subcategories: [newSubcategory.id, ...category.subcategories]})
                     : category
@@ -42,7 +42,7 @@ const todoApp = (state = initialState, action = {}) => {
             return Object.assign({}, state, {categoryList: newCategoryList});
 
         case EDIT_CATEGORY:
-            newCategoryList = initialState.categoryList.map(category => {
+            newCategoryList = state.categoryList.map(category => {
                 if(category.id === action.categoryToEdit) {
                     category.title = action.newCategoryTitle
                 }
@@ -51,7 +51,7 @@ const todoApp = (state = initialState, action = {}) => {
             return Object.assign({}, state, {categoryList: newCategoryList});
 
         case DELETE_CATEGORY:
-            newCategoryList = initialState.categoryList.map(category => {
+            newCategoryList = state.categoryList.map(category => {
                 if(category.subcategories.includes(action.categoryToDelete)) {
                     category.subcategories = category.subcategories.filter(sub => sub !== action.categoryToDelete);
                 }
@@ -70,7 +70,7 @@ const todoApp = (state = initialState, action = {}) => {
             return Object.assign({}, state, {categoryList: newCategoryList});
 
         case EDIT_TASK:
-            newCategoryList = initialState.categoryList.map(category => {
+            newCategoryList = state.categoryList.map(category => {
                 category.todos.map(todo => {
                     if(todo.id === action.taskToEdit) {
                         todo.title = action.newTaskTitle;
@@ -86,11 +86,11 @@ const todoApp = (state = initialState, action = {}) => {
         case MOVE_TASK_TO_NEW_CATEGORY:
             let currentTodo;
 
-            initialState.categoryList.forEach(category => category.todos.forEach(todo => {
+            state.categoryList.forEach(category => category.todos.forEach(todo => {
                 if(todo.id === action.currentTask) currentTodo = todo;
             }));
 
-            newCategoryList = initialState.categoryList.map(category => {
+            newCategoryList = state.categoryList.map(category => {
                 category.todos = category.todos.filter(todo => todo.id !== action.currentTask);
                 return category
             })

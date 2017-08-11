@@ -1,4 +1,4 @@
-[
+ let data = [
   {
     "id": 1,
     "title": "Finish cleaning the house",
@@ -60,5 +60,6 @@
     "root": false,
     "subcategories": []
   }
-]
+];
 
+ export default data;
