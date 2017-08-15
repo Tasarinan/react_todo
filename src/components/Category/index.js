@@ -11,7 +11,7 @@ import ProgressBar from "../ProgressBar";
 import CategoryTile from '../CategoryTile';
 import TodoTile from '../TodoTile';
 
-const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, editTask, ...restProps}) => {
+const Category = ({categoryList, ...restProps}) => {
     const itemsToRender = categoryList
         .filter(cat => cat.root)
         .map(cat => cat.id);
@@ -20,10 +20,8 @@ const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, 
         <div>
             <MainHeader
                 categoryList={categoryList}
-                isShowDoneChecked={isShowDoneChecked}
-                checkCompleted={checkCompleted}
             />
-            {/*<ProgressBar categoryList={categoryList}/>*/}
+            <ProgressBar categoryList={categoryList}/>
             <div className="Category">
                 <CategoryTile
                     categoryList={categoryList}
@@ -33,7 +31,7 @@ const Category = ({categoryList, isShowDoneChecked, checkCompleted, addNewTask, 
                 />
                 <Switch>
                     <Route path="/:categoryId"
-                           render={routeProps => <TodoTile categoryList={categoryList} addNewTask={addNewTask} editTask={editTask} {...routeProps} />}
+                           render={routeProps => <TodoTile categoryList={categoryList} {...routeProps} />}
                     />
                     <Route render={() => (
                         <p>Please select an todo item to see it subtasks</p>

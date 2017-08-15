@@ -8,7 +8,8 @@ import {
     EDIT_TASK,
     MOVE_TASK_TO_NEW_CATEGORY,
     GET_MODAL_CONFIG,
-    OPEN_MODAL
+    OPEN_MODAL,
+    CHECK_COMPLETED
 } from '../actions'
 import { createNewCategory, createNewTask } from '../helpers';
 
@@ -21,6 +22,7 @@ const initialState = {
         title: ""
     },
     isModalOpen: false,
+    isShowDoneChecked: false,
 };
 
 const todoApp = (state = initialState, action = {}) => {
@@ -107,6 +109,16 @@ const todoApp = (state = initialState, action = {}) => {
 
         case OPEN_MODAL:
             return Object.assign({}, state, {isModalOpen: !state.isModalOpen});
+
+        case CHECK_COMPLETED:
+            if(action.newIsShowDoneChecked) {
+                const newCategoryList = initialState.categoryList.map(category => {
+                    category.todos = category.todos.filter(todo => todo.isCompleted);
+                    return category;
+                });
+                return Object.assign({}, state, {isShowDoneChecked: action.newIsShowDoneChecked, categoryList: newCategoryList});
+            }
+            return Object.assign({}, state, {isShowDoneChecked: action.newIsShowDoneChecked});
 
         default:
             return state;

@@ -5,7 +5,7 @@ import CategoryAdderContainer from '../../containers/CategoryAdderContainer';
 import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
 
-const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId, moveTaskToNewCategory}) => {
+const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId}) => {
 
     return (
 		<div className="CategoryTile">
@@ -15,7 +15,6 @@ const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId, mo
 				itemsToRender={itemsToRender}
 				shouldRenderCRUD={shouldRenderCRUD}
 				todoId={todoId}
-				moveTaskToNewCategory={moveTaskToNewCategory}
 			/>
             {shouldRenderCRUD && <ModalDialogContainer/>}
 		</div>

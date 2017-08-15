@@ -4,7 +4,7 @@ import './TodoTile.css';
 import TodoAdderContainer from '../../containers/TodoAdderContainer';
 import TodosList from '../TodosList'
 
-const TodoTile = ({match, categoryList, addNewTask, editTask}) => {
+const TodoTile = ({match, categoryList}) => {
 	const categoryId = Number(match.params.categoryId);
     const todosList = categoryList
         .filter(cat => cat.id === categoryId)
@@ -13,7 +13,7 @@ const TodoTile = ({match, categoryList, addNewTask, editTask}) => {
 	return (
 		<div className="TodoTile">
 			<TodoAdderContainer categoryId={categoryId}/>
-			<TodosList todosList={todosList} editTask={editTask} url={match.url}/>
+			<TodosList todosList={todosList} url={match.url}/>
 		</div>
 	);
 };

@@ -8,10 +8,8 @@ export const EDIT_TASK = 'EDIT_TASK';
 export const MOVE_TASK_TO_NEW_CATEGORY = 'MOVE_TASK_TO_NEW_CATEGORY';
 export const GET_MODAL_CONFIG = 'GET_MODAL_CONFIG';
 export const OPEN_MODAL = 'OPEN_MODAL';
+export const CHECK_COMPLETED = 'CHECK_COMPLETED';
 
-export function checkCompleted(newIsShowDoneChecked) {
-    return { type: CHECK_COMPLETED_TODOS, newIsShowDoneChecked }
-}
 export const addNewCategory = (newCategoryTitle) => {
     return { type: ADD_NEW_CATEGORY, newCategoryTitle }
 };
@@ -38,4 +36,7 @@ export const getModalConfig = (modalConfig) => {
 };
 export const openModal = () => {
     return { type: OPEN_MODAL }
+};
+export const checkCompleted = (newIsShowDoneChecked) => {
+    return { type: CHECK_COMPLETED, newIsShowDoneChecked }
 };
