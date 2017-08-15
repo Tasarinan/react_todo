@@ -1,4 +1,5 @@
 .CategoryList {
+    width: 49vw;
     list-style: none;
     max-height: 60vh;
     overflow-y: scroll;
