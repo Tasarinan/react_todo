@@ -20,7 +20,7 @@ const ModalDialogContainer = connect(
         addNewSubcategory,
         editCategory,
         deleteCategory,
-        openModal
+        handleModalOpen: openModal,
     }
 )(CRUDModal);
 
