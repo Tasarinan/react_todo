@@ -8,7 +8,6 @@ import {
     DELETE_CATEGORY
 } from '../actions';
 
-
 const initialState = {
     categoryList: data,
 };

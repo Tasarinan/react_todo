@@ -4,7 +4,6 @@ import {
     addNewSubcategory,
     editCategory,
     deleteCategory,
-    //getModalConfig,
     openModal
 } from '../../actions';
 
@@ -15,19 +14,14 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewSubcategory: (newSubcategoryTitle, categoryToAddSub) => dispatch(addNewSubcategory(newSubcategoryTitle, categoryToAddSub)),
-        editCategory: (newCategoryTitle, categoryToEdit) => dispatch(editCategory(newCategoryTitle, categoryToEdit)),
-        deleteCategory: (categoryToDelete) => dispatch(deleteCategory(categoryToDelete)),
-        // getModalConfig: (modalConfig) => dispatch(getModalConfig(modalConfig)) ,
-        handleModalOpen: (isModalOpen) => dispatch(openModal(isModalOpen))
-    }
-};
-
 const ModalDialogContainer = connect(
     mapStateToProps,
-    mapDispatchToProps
+    {
+        addNewSubcategory,
+        editCategory,
+        deleteCategory,
+        openModal
+    }
 )(CRUDModal);
 
 export default ModalDialogContainer;

@@ -1,5 +1,4 @@
 .CategoryList {
-    width: 95%;
     list-style: none;
     max-height: 60vh;
     overflow-y: scroll;
@@ -8,7 +7,7 @@
     margin: 0 10px;
 }
 .CategoryList .CategoryList {
-    padding: 5px;
+    padding: 5px 5px 5px 0;
 }
 .CategoryList:empty{
     display: none;

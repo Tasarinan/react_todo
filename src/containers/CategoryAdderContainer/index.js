@@ -9,15 +9,9 @@ const CategoryAdder = (props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewItem: (newCategoryTitle) => dispatch(addNewCategory(newCategoryTitle))
-    }
-};
-
 const CategoryAdderContainer = connect(
     null,
-    mapDispatchToProps
+    {addNewItem: addNewCategory}
 )(CategoryAdder);
 
 export default CategoryAdderContainer;

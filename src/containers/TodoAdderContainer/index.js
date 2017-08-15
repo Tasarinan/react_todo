@@ -9,17 +9,9 @@ const TodoAdder = (props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewItem: (newTaskTitle, categoryToAddTask) => {
-            dispatch(addNewTask(newTaskTitle, categoryToAddTask))
-        }
-    }
-};
-
 const TodoAdderContainer = connect(
     null,
-    mapDispatchToProps
+    {addNewItem: addNewTask}
 )(TodoAdder);
 
 export default TodoAdderContainer;

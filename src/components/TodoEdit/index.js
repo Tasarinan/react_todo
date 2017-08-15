@@ -18,7 +18,6 @@ const TodoEdit = ({ categoryId, editTask, todoItem: {id, title, isCompleted, des
 		editTask(id, newTitle.value, newIsCompleted.checked, newDescription.value);
 	};
 
-
 	return (
         <div className="TodoEdit">
             <h1 className="TodoEditMainTitle">Task details:</h1>

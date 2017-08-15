@@ -3,6 +3,9 @@
     flex-wrap: wrap;
     min-height: 40px;
 }
+.CategoryItem .CategoryItem {
+    margin-left: 20px;
+}
 .CategoryItemLine {
     width: 100%;
     height: 48px;

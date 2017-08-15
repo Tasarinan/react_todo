@@ -5,7 +5,8 @@ import {
     editCategory,
     deleteCategory,
     openModal,
-    getModalConfig
+    getModalConfig,
+    moveTaskToNewCategory
 } from '../../actions';
 
 const mapStateToProps = (state) => {
@@ -14,20 +15,16 @@ const mapStateToProps = (state) => {
         isModalOpen: state.isModalOpen,
     }
 };
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewSubcategory: (newSubcategoryTitle, categoryToAddSub) => dispatch(addNewSubcategory(newSubcategoryTitle, categoryToAddSub)),
-        editCategory: (newCategoryTitle, categoryToEdit) => dispatch(editCategory(newCategoryTitle, categoryToEdit)),
-        deleteCategory: (categoryToDelete) => dispatch(deleteCategory(categoryToDelete)),
-        getModalConfig: (modalConfig) => dispatch(getModalConfig(modalConfig)),
-        handleModalOpen: (isModalOpen) => dispatch(openModal(isModalOpen))
-    }
-};
-
 const CategoryItemContainer = connect(
     mapStateToProps,
-    mapDispatchToProps
+    {
+        addNewSubcategory,
+        editCategory,
+        deleteCategory,
+        getModalConfig,
+        handleModalOpen: openModal,
+        moveTaskToNewCategory
+    }
 )(CategoryItem);
 
 export default CategoryItemContainer;
