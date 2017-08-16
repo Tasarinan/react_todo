@@ -9,8 +9,8 @@ import {
 
 const mapStateToProps = (state) => {
     return {
-        modalConfig: state.modalConfig,
-        isModalOpen: state.isModalOpen,
+        modalConfig: state.modal.modalConfig,
+        isModalOpen: state.modal.isModalOpen,
     }
 };
 

@@ -3,7 +3,7 @@ import Dashboard from '../../components/Dashboard';
 
 const mapStateToProps = (state) => {
     return {
-        categoryList: state.categoryList
+        categoryList: state.category.categoryList
     }
 };
 
