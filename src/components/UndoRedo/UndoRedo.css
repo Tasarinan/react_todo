@@ -1,0 +1,10 @@
+.UndoRedo {
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.UndoRedoButton {
+    margin: 0 10px;
+}

@@ -1,3 +1,5 @@
+import undoable, { distinctState } from 'redux-undo'
+
 import data from '../data';
 import {
     ADD_NEW_CATEGORY,
@@ -20,6 +22,7 @@ const category = (state = initialState, action = {}) => {
     let newCategoryList;
 
     switch (action.type) {
+
         case ADD_NEW_CATEGORY:
             return Object.assign({}, state, {
                 categoryList: [createNewCategory(action.newCategoryTitle, true), ...state.categoryList]
@@ -85,8 +88,8 @@ const category = (state = initialState, action = {}) => {
 
             newCategoryList = state.categoryList.map(category => {
                 category.todos = category.todos.filter(todo => todo.id !== action.currentTask);
-                return category
-            })
+                    return category
+                })
                 .map(category => {
                     if(category.id === action.categoryToAddNewTask) {
                         category.todos.push(currentTodo);
@@ -110,4 +113,8 @@ const category = (state = initialState, action = {}) => {
     }
 };
 
-export default category;
+const undoableCategory = undoable(category, {
+    filter: distinctState()
+});
+
+export default undoableCategory;

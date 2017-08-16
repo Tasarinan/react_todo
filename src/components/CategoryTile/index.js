@@ -4,6 +4,7 @@ import './CategoryTile.css';
 import CategoryAdderContainer from '../../containers/CategoryAdderContainer';
 import CategoryList from '../CategoryList';
 import ModalDialogContainer from '../../containers/ModalDialogContainer';
+import UndoRedoContainer from '../../containers/UndoRedoContainer';
 
 const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId}) => {
 
@@ -17,6 +18,7 @@ const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId}) =
 				todoId={todoId}
 			/>
             {shouldRenderCRUD && <ModalDialogContainer/>}
+			<UndoRedoContainer />
 		</div>
     );
 };

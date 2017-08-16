@@ -5,7 +5,7 @@ import TodoEditContainer from '../../containers/TodoEditContainer';
 import { findCurrentItem } from '../../helpers'
 import './Todo.css';
 
-const Todo = ({match, categoryList, editTask, ...restProps}) => {
+const Todo = ({match, categoryList, ...restProps}) => {
     const itemsToRender = categoryList
         .filter(cat => cat.root)
         .map(cat => cat.id);
