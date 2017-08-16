@@ -100,7 +100,7 @@ const category = (state = initialState, action = {}) => {
 
         case CHECK_COMPLETED:
             if(action.newIsShowDoneChecked) {
-                const newCategoryList = initialState.categoryList.map(category => {
+                const newCategoryList = state.categoryList.map(category => {
                     category.todos = category.todos.filter(todo => todo.isCompleted);
                     return category;
                 });

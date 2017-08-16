@@ -11,7 +11,6 @@ const UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }) => (
             <UndoIcon onTouchTap={onUndo}/>
         </FloatingActionButton>
 
-
         <FloatingActionButton mini disabled={!canRedo} className="UndoRedoButton">
             <RedoIcon onTouchTap={onRedo} />
         </FloatingActionButton>

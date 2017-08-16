@@ -18,7 +18,7 @@ const CategoryTile = ({categoryList, itemsToRender, shouldRenderCRUD, todoId}) =
 				todoId={todoId}
 			/>
             {shouldRenderCRUD && <ModalDialogContainer/>}
-			<UndoRedoContainer />
+            {shouldRenderCRUD && <UndoRedoContainer/>}
 		</div>
     );
 };
