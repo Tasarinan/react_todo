@@ -1,5 +1,6 @@
 import undoable, { distinctState } from 'redux-undo'
-
+import cloneDeep from 'lodash.clonedeep';
+import { createNewCategory, createNewTask } from '../helpers';
 import data from '../data';
 import {
     ADD_NEW_CATEGORY,
@@ -10,8 +11,7 @@ import {
     EDIT_TASK,
     MOVE_TASK_TO_NEW_CATEGORY,
     CHECK_COMPLETED
-} from '../actions'
-import { createNewCategory, createNewTask } from '../helpers';
+} from '../actions';
 
 const initialState = {
     categoryList: data,
@@ -57,7 +57,7 @@ const category = (state = initialState, action = {}) => {
 
 
         case ADD_NEW_TASK:
-            newCategoryList = state.categoryList.map(category => {
+            newCategoryList = cloneDeep(state.categoryList).map(category => {
                 if(category.id === action.categoryToAddTask) {
                     category.todos = [ ...category.todos, createNewTask(action.newTaskTitle)]
                 }
@@ -100,7 +100,7 @@ const category = (state = initialState, action = {}) => {
 
         case CHECK_COMPLETED:
             if(action.newIsShowDoneChecked) {
-                const newCategoryList = state.categoryList.map(category => {
+                const newCategoryList = cloneDeep(state.categoryList).map(category => {
                     category.todos = category.todos.filter(todo => todo.isCompleted);
                     return category;
                 });
